@@ -158,6 +158,48 @@ g.	How does R represent when the output of a function is not a number?
 6.	If a population starts with a density of 5 individuals/hectare and grows exponentially at a growth rate r=0.04/year, what is the size of the population in π years? (show code)
 7.	Subtract the month you were born from the remainder left after you divide the year you were born by the day you were born (show code)
 ```
+### Answers:
+1. 
+```{r, echo=TRUE}
+   log(1)        ## a. ln(1)
+   log(0)        ## b. ln(0)
+   log(exp(1))   ## c. ln(e)
+   log(-5)       ## d. ln(-5)
+   -log(5)       ## e. -ln(5)
+   log(1/5)      ## f. ln(1/5)
+```
+g. If the answer is infinity, the output is "Inf". If the expression has no meaning, the output is NaNs (not a number) and R would give a warning saying that NaNs produced.
+
+2. The ouput of atan and atan2 are in the unit of radians. If we want the output to be represented in degrees, we need to multiply the outputs by 180/pi.
+
+3. The atan function only takes one variable (a number), whereas the atan2 function takes two variables (the x, y values of a vector). The atan2 function returns the angle between the x-axis and the vector from the origin to (x, y).
+
+4. In R, log is the natural logarithm, whereas log10 is logarithm with base 10.
+
+5. 
+```{r, echo=TRUE}
+   x = 5
+   y = 13
+   z = sqrt(x^2 + y^2)
+   print(z)  # The hypotenuse
+```
+
+6. 
+```{r, echo=TRUE}
+   start_density = 5
+   rate = 0.04
+   population = 5 * (1+0.04)^pi
+   print(population)  # population size in π years
+```
+
+7. 
+```{r, echo=TRUE}
+   b_month = 3
+   b_day = 2
+   b_year= 1994
+   result = (b_year %% b_day) - b_month
+   print(result)
+```
 
 
 ## R Scripts
@@ -198,14 +240,38 @@ cumsum(1:10)		## cumulative sum of values in a vector
 prod(1:10)		## product of values in a vector
 ```
  
-```
-Questions:
+### Questions:
 8.	Describe the difference in output between sum and cumsum.
 9.	Generate a sequence of even numbers from -6 to 6
 10.	Generate a sequence of values from -4.8 to -3.43 that is length 8 (show code)
 a.	What is the difference between values in this sequence?
 b.	What is the sum of the exponential of this sequence?
 11.	Calculate a second difference [a difference of differences] for the sequence 1:10 (show code)
+
+
+### Answers:
+8. The output of sum is a number that sums up all values in a vector, whereas cumsum is a vector in which each number is the sum of the values from the first value to the value in the orginal vector at the same position.
+
+9.
+```{r, echo=TRUE}
+   x=seq(-6, 6, by=2)
+   print(x)
+```
+
+10.
+```{r, echo=TRUE}
+   x=seq(-4.8, -3.43, length=8)
+   print(x)    # the sequence
+   diff(x)[1]  # the differences
+   sum(exp(x)) # The sum of the exponential of this sequence
+```
+
+11.
+```{r, echo=TRUE}
+   x = seq(1:10)
+   diff_1 = diff(x)
+   diff_2 = diff(diff_1)
+   print(diff_2)  # The second difference
 ```
 
 ## Loading and Saving Data
@@ -264,6 +330,8 @@ Within the Environment window, clicking on a variable will show you the contents
 ```
 12.	Save the frog data file delimited in a pipe-delimited format (i.e. separated by ‘|’). Open the file up in a text editor and cut-and-paste the first few lines of the file into your Rscript file (just so I can see what you did).  Load the data back up into R as ‘dat2’ (show code)
 ```
+
+
 
 
 ## Data types and dimensions
