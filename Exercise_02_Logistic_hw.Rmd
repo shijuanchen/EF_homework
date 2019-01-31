@@ -41,6 +41,7 @@ plot(time,n,ylim=c(0,12),lwd=3,type='l',
 1. Generate plots of the logistic growth model at r = 1.95, 2.05, 2.5, and 2.8 Describe the trajectory observed in each case.
 
 ```{r fig.align="center"}
+Problem1_1 <- function(){
 r = 1.95         ## intrinsic growth rate
 K = 10        ## carrying capacity      
 n0 = .1       ## initial population size
@@ -53,6 +54,8 @@ for(t in 2:NT){
 plot(time,n,ylim=c(0,12),lwd=3,type='l',
      bty='l',cex.lab=1.5,
      xlab="Time",ylab="Population Size")
+}
+Problem1_1()
 ```
 <br /><center>
 Figure 1    growth rate r=1.95
@@ -61,6 +64,7 @@ Figure 1 shows the trajectory when the growth rate is 1.95.
 
 
 ```{r fig.align="center"}
+Problem1_2 <- function(){
 r = 2.05         ## intrinsic growth rate
 K = 10        ## carrying capacity      
 n0 = .1       ## initial population size
@@ -73,6 +77,8 @@ for(t in 2:NT){
 plot(time,n,ylim=c(0,12),lwd=3,type='l',
      bty='l',cex.lab=1.5,
      xlab="Time",ylab="Population Size")
+}
+Problem1_2()
 ```
 <br /><center>
 Figure 2    growth rate r = 2.05
@@ -81,6 +87,7 @@ Figure 2 shows the trajectory when the growth rate is 1.95.
 
 
 ```{r fig.align="center"}
+Problem1_3 <- function(){
 r = 2.5         ## intrinsic growth rate
 K = 10        ## carrying capacity      
 n0 = .1       ## initial population size
@@ -93,6 +100,8 @@ for(t in 2:NT){
 plot(time,n,ylim=c(0,12),lwd=3,type='l',
      bty='l',cex.lab=1.5,
      xlab="Time",ylab="Population Size")
+}
+Problem1_3()
 ```
 <br /><center>
 Figure 3    growth rate r = 2.5
@@ -101,6 +110,7 @@ Figure 3 shows the trajectory when the growth rate is 2.5.
 
 
 ```{r fig.align="center"}
+Problem1_4 <- function(){
 r = 2.8         ## intrinsic growth rate
 K = 10        ## carrying capacity      
 n0 = .1       ## initial population size
@@ -113,6 +123,8 @@ for(t in 2:NT){
 plot(time,n,ylim=c(0,12),lwd=3,type='l',
      bty='l',cex.lab=1.5,
      xlab="Time",ylab="Population Size")
+}
+Problem1_4()
 ```
 <br /><center>
 Figure 4    growth rate r = 2.8
@@ -376,11 +388,49 @@ n.stats = apply(n,2,quantile,c(0.025,0.5,0.975))
 
 4. Plot histograms of the samples of r and K used for the simulation.
 
+```{r}
+hist(rE, breaks=40)
+hist(KE, breaks=40)
+```
+
 5. Plot a sample of 10 different trajectories (through time) from your ensemble (on one graph).
+```{r}
+for(i in 1:NE){        # loop over samples
+  for(t in 2:NT){      # for each sample, simulate throught time
+    n[i,t] = n[i,t-1] + rE[i]*n[i,t-1]*(1-n[i,t-1]/KE[i])
+  }
+}
+
+plot(x=1:NT,y=n[1, 1:NT], type='l', ylim=c(0, 12))
+sp = sample(1:NE, 10)
+for(i in sp){
+  lines(x=1:NT, y=n[i,1:NT], type='l',col=i)
+}
+```
 
 6. Plot a histogram of your population forecast at time = 15.
 
+```{r}
+hist(n[,15])
+```
+
 7. Plot the median trajectory through time. Use `ecoforecastR::ciEnvelope` to add a 95% CI (i.e. 2.5% to 97.5%) to the plot. This function need to take time-series for both the upper (yhi) and lower (ylo) intervals.
+
+```{r}
+med_n = 1:NT
+up = 1:NT
+down = 1:NT
+for(i in 1:NT){
+  med_n[i] = median(n[,i])
+  up[i] = quantile(n[,i],c(0.025))
+  down[i] = quantile(n[,i],c(0.975))
+}
+
+plot(x=1:NT,y=med_n[1:NT], type='l', ylim=c(0, 12), col=4)
+ecoforecastR::ciEnvelope(x=1:NT, ylo=down, yhi=up, col=2)
+lines(x=1:NT,y=med_n[1:NT], type='l', ylim=c(0, 12), col=4)
+ # calculcate the median trajectory
+```
 
 Extra Credit: Initial conditions
 --------------------------------
@@ -402,8 +452,91 @@ for(i in 1:NE){
 ### Problems
 
 8. Plot the median & 95% interval.
+```{r}
+med_n = 1:NT
+up = 1:NT
+down = 1:NT
+for(i in 1:NT){
+  med_n[i] = median(n[,i])
+  up[i] = quantile(n[,i],c(0.025))
+  down[i] = quantile(n[,i],c(0.975))
+}
+plot(x=1:NT,y=med_n[1:NT], type='l', ylim=c(0, 12), col=4)
+ecoforecastR::ciEnvelope(x=1:NT, ylo=down, yhi=up, col=2)
+lines(x=1:NT,y=med_n[1:NT], type='l', ylim=c(0, 12), col=4)
+```
 
 9. Repeat with r equal to 1.95, 2.05, and 2.8
 
-
-
+<br />
+When r = 1.95,
+```{r}
+r = 1.95
+n0.sd = 0.6
+n0s = rlnorm(NE,log(n0),n0.sd)
+n = matrix(n0s,NE,NT)
+for(i in 1:NE){
+  for(t in 2:NT){
+    n[i,t] = n[i,t-1] + r*n[i,t-1]*(1-n[i,t-1]/K)
+  }
+}
+med_n = 1:NT
+up = 1:NT
+down = 1:NT
+for(i in 1:NT){
+  med_n[i] = median(n[,i])
+  up[i] = quantile(n[,i],c(0.025))
+  down[i] = quantile(n[,i],c(0.975))
+}
+plot(x=1:NT,y=med_n[1:NT], type='l', ylim=c(0, 12), col=4)
+ecoforecastR::ciEnvelope(x=1:NT, ylo=down, yhi=up, col=2)
+lines(x=1:NT,y=med_n[1:NT], type='l', ylim=c(0, 12), col=4)
+```
+<br />
+When r = 2.05,
+```{r}
+r = 2.05
+n0.sd = 0.6
+n0s = rlnorm(NE,log(n0),n0.sd)
+n = matrix(n0s,NE,NT)
+for(i in 1:NE){
+  for(t in 2:NT){
+    n[i,t] = n[i,t-1] + r*n[i,t-1]*(1-n[i,t-1]/K)
+  }
+}
+med_n = 1:NT
+up = 1:NT
+down = 1:NT
+for(i in 1:NT){
+  med_n[i] = median(n[,i])
+  up[i] = quantile(n[,i],c(0.025))
+  down[i] = quantile(n[,i],c(0.975))
+}
+plot(x=1:NT,y=med_n[1:NT], type='l', ylim=c(0, 12), col=4)
+ecoforecastR::ciEnvelope(x=1:NT, ylo=down, yhi=up, col=2)
+lines(x=1:NT,y=med_n[1:NT], type='l', ylim=c(0, 12), col=4)
+```
+<br />
+When r = 2.8,
+```{r}
+r = 2.8
+n0.sd = 0.6
+n0s = rlnorm(NE,log(n0),n0.sd)
+n = matrix(n0s,NE,NT)
+for(i in 1:NE){
+  for(t in 2:NT){
+    n[i,t] = n[i,t-1] + r*n[i,t-1]*(1-n[i,t-1]/K)
+  }
+}
+med_n = 1:NT
+up = 1:NT
+down = 1:NT
+for(i in 1:NT){
+  med_n[i] = median(n[,i])
+  up[i] = quantile(n[,i],c(0.025))
+  down[i] = quantile(n[,i],c(0.975))
+}
+plot(x=1:NT,y=med_n[1:NT], type='l', ylim=c(0, 15), col=4)
+ecoforecastR::ciEnvelope(x=1:NT, ylo=down, yhi=up, col=2)
+lines(x=1:NT,y=med_n[1:NT], type='l', ylim=c(0, 15), col=4)
+```
