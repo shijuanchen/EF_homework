@@ -60,7 +60,7 @@ Problem1_1()
 <br /><center>
 Figure 1    growth rate r=1.95
 </center>
-Figure 1 shows the trajectory when the growth rate is 1.95. 
+Figure 1 shows the trajectory when the growth rate is 1.95. Before the population size reaches the carrying capacity (K=10), the population size grows exponetially. After the population size reaches the carry capacity (K=10), the population size varies up and down around the carry capacity. After the population size reaches the carry capacity, the variability of the population size decreases slightly over time.
 
 
 ```{r fig.align="center"}
@@ -75,15 +75,17 @@ for(t in 2:NT){
   n[t] = n[t-1] + r*n[t-1]*(1-n[t-1]/K)
 }
 plot(time,n,ylim=c(0,12),lwd=3,type='l',
-     bty='l',cex.lab=1.5,
+     bty='l',cex.lab=1.5, 
      xlab="Time",ylab="Population Size")
+#axis(4, at=n, tck=0.5, labels=round(n,digits=2))
 }
+
 Problem1_2()
 ```
 <br /><center>
 Figure 2    growth rate r = 2.05
 </center>
-Figure 2 shows the trajectory when the growth rate is 1.95. 
+Figure 2 shows the trajectory when the growth rate is 2.05. Before the population size reaches the carrying capacity (K=10), the population size grows exponetially. After the population size reaches the carry capacity (K=10), the population size varies between from about 8.5 to about 11, and the variability of the population is larger than what it is when r=1.95. 
 
 
 ```{r fig.align="center"}
@@ -106,7 +108,7 @@ Problem1_3()
 <br /><center>
 Figure 3    growth rate r = 2.5
 </center>
-Figure 3 shows the trajectory when the growth rate is 2.5. 
+Figure 3 shows the trajectory when the growth rate is 2.5. Before the population size reaches the carrying capacity (K=10), the population size grows exponetially. After the population size reaches the carry capacity (K=10), the population size varies between about 6 to 12. The variability of the population size increases from time=5 to time=10. After that
 
 
 ```{r fig.align="center"}
