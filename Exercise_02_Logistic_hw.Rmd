@@ -108,7 +108,7 @@ Problem1_3()
 <br /><center>
 Figure 3    growth rate r = 2.5
 </center>
-Figure 3 shows the trajectory when the growth rate is 2.5. Before the population size reaches the carrying capacity (K=10), the population size grows exponetially. After the population size reaches the carry capacity (K=10), the population size varies between about 6 to 12. The variability of the population size increases from time=5 to time=10. After that
+Figure 3 shows the trajectory when the growth rate is 2.5. Before the population size reaches the carrying capacity (K=10), the population size grows exponetially. After the population size reaches the carry capacity (K=10), the population size varies between about 6 to 12. The variability of the population size increases from time=5 to time=10. After that, the variability of the population size remains stable.
 
 
 ```{r fig.align="center"}
@@ -131,7 +131,7 @@ Problem1_4()
 <br /><center>
 Figure 4    growth rate r = 2.8
 </center>
-Figure 4 shows the trajectory when the growth rate is 2.8. 
+Figure 4 shows the trajectory when the growth rate is 2.8. Before the population size reaches the carrying capacity (K=10), the population size grows exponetially. After that, the population size varies between 3 to 12. In general, when the growth rate increases, the variability of the population size increases after reaching the carrying capacity.
 
 Probability distributions in R
 ------------------------------
