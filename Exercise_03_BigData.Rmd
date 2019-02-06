@@ -150,6 +150,7 @@ In this section I want to introduce another command-line utility, wget, which ca
 
 ```{r}
 system("wget http://flux.aos.wisc.edu/data/cheas/wlef/netcdf/US-PFa-WLEF-TallTowerClean-2012-L0-vFeb2013.nc")
+# I could not make this line working, so I manually donwloaded the netCDF data.
 ```
 
 Next, lets open the file and look at what it contains
