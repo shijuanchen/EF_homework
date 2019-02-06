@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 Exercise 3: Tools for big data
 ========================================================
 
@@ -62,6 +67,20 @@ For more information, please visit http://www.google.org/flutrends
 
 Using the US Forest Service's Forest Inventory and Analysis (FIA) data set, plot the rank vs log(abundance) curve for tree seedling counts from Rhode Island. Data is available at https://apps.fs.usda.gov/fia/datamart/CSV/RI_SEEDLING.csv and the relevant columns are TREECOUNT (raw seedling counts) and SPCD (species codes). 
 Hints: tapply, sum, na.rm=TRUE, sort, decreasing=TRUE, log='y'
+```{r}
+fia_data = read.csv("https://apps.fs.usda.gov/fia/datamart/CSV/RI_SEEDLING.csv")
+tree_count = as.integer(fia_data$TREECOUNT)
+species = as.integer(fia_data$SPCD)
+abund = tapply(tree_count, species, sum, na.rm=TRUE)
+abund = sort(abund, decreasing=TRUE)
+for i in abund:{
+  y = log(abund[[i]])
+}
+
+#plot(x, log = abund)
+#test = sum(tree_count,na.rm=TRUE)
+#print(test)
+```
 
 
 Web Scraping
