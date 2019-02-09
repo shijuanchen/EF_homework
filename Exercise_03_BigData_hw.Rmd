@@ -72,14 +72,9 @@ fia_data = read.csv("https://apps.fs.usda.gov/fia/datamart/CSV/RI_SEEDLING.csv")
 tree_count = as.integer(fia_data$TREECOUNT)
 species = as.integer(fia_data$SPCD)
 abund = tapply(tree_count, species, sum, na.rm=TRUE)
-abund = sort(abund, decreasing=TRUE)
-for i in abund:{
-  y = log(abund[[i]])
-}
-
-#plot(x, log = abund)
-#test = sum(tree_count,na.rm=TRUE)
-#print(test)
+abund_s = sort(abund, decreasing=TRUE)
+print(length(abund_s))
+plot(x=1:length(abund_s), y = log(abund_s), xlab="rank", ylab="log(abundance)")
 ```
 
 
