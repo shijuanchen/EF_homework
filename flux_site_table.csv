@@ -1,0 +1,380 @@
+SITE_ID,SITE_NAME,2015_DATA_TIER,2015_DATA_START,2015_DATA_END,LOCATION_LAT,LOCATION_LONG,LOCATION_ELEV,IGBP,MAT,MAP
+,,,,,,,,,,
+AR-SLu,San Luis,"Tier1,",Tier1: 2009,Tier1: 2011,-33.4648,-66.4598,,MF,,400
+,,Tier2,Tier2: 2009,Tier2: 2011,,,,,,
+AR-Vir,Virasoro,"Tier1,",Tier1: 2009,Tier1: 2012,-28.2395,-56.1886,,ENF,,
+,,Tier2,Tier2: 2009,Tier2: 2012,,,,,,
+AT-Neu,Neustift,"Tier1,",Tier1: 2002,Tier1: 2012,47.1167,11.3175,970,GRA,6.3,852
+,,Tier2,Tier2: 2002,Tier2: 2012,,,,,,
+AU-Ade,Adelaide River,"Tier1,",Tier1: 2007,Tier1: 2009,-13.0769,131.1178,,WSA,,
+,,Tier2,Tier2: 2007,Tier2: 2009,,,,,,
+AU-ASM,Alice Springs,"Tier1,",Tier1: 2010,Tier1: 2013,-22.283,133.249,,ENF,,
+,,Tier2,Tier2: 2010,Tier2: 2014,,,,,,
+AU-Cpr,Calperum,"Tier1,",Tier1: 2010,Tier1: 2014,-34.0021,140.5891,,SAV,,
+,,Tier2,Tier2: 2010,Tier2: 2014,,,,,,
+AU-Cum,Cumberland Plain,"Tier1,",Tier1: 2012,Tier1: 2014,-33.6152,150.7236,,EBF,,
+,,Tier2,Tier2: 2012,Tier2: 2014,,,,,,
+AU-DaP,Daly River Savanna,"Tier1,",Tier1: 2007,Tier1: 2013,-14.0633,131.3181,,GRA,,
+,,Tier2,Tier2: 2007,Tier2: 2013,,,,,,
+AU-DaS,Daly River Cleared,"Tier1,",Tier1: 2008,Tier1: 2014,-14.1593,131.3881,,SAV,,
+,,Tier2,Tier2: 2008,Tier2: 2014,,,,,,
+AU-Dry,Dry River,"Tier1,",Tier1: 2008,Tier1: 2014,-15.2588,132.3706,,SAV,,
+,,Tier2,Tier2: 2008,Tier2: 2014,,,,,,
+AU-Emr,Emerald,"Tier1,",Tier1: 2011,Tier1: 2013,-23.8587,148.4746,,GRA,,
+,,Tier2,Tier2: 2011,Tier2: 2013,,,,,,
+AU-Fog,Fogg Dam,"Tier1,",Tier1: 2006,Tier1: 2008,-12.5452,131.3072,,WET,,
+,,Tier2,Tier2: 2006,Tier2: 2008,,,,,,
+AU-Gin,Gingin,"Tier1,",Tier1: 2011,Tier1: 2014,-31.3764,115.7138,,WSA,,
+,,Tier2,Tier2: 2011,Tier2: 2014,,,,,,
+AU-GWW,"Great Western Woodlands, Western Australia, Australia","Tier1,",Tier1: 2013,Tier1: 2014,-30.1913,120.6541,,SAV,,
+,,Tier2,Tier2: 2013,Tier2: 2014,,,,,,
+AU-How,Howard Springs,"Tier1,",Tier1: 2001,Tier1: 2014,-12.4943,131.1523,,WSA,,
+,,Tier2,Tier2: 2001,Tier2: 2014,,,,,,
+AU-Lox,Loxton,"Tier1,",Tier1: 2008,Tier1: 2009,-34.4704,140.6551,,DBF,,
+,,Tier2,Tier2: 2008,Tier2: 2009,,,,,,
+AU-RDF,"Red Dirt Melon Farm, Northern Territory","Tier1,",Tier1: 2011,Tier1: 2013,-14.5636,132.4776,,WSA,,
+,,Tier2,Tier2: 2011,Tier2: 2013,,,,,,
+AU-Rig,Riggs Creek,"Tier1,",Tier1: 2011,Tier1: 2014,-36.6499,145.5759,,GRA,,
+,,Tier2,Tier2: 2011,Tier2: 2014,,,,,,
+AU-Rob,"Robson Creek, Queensland, Australia","Tier1,",Tier1: 2014,Tier1: 2014,-17.1175,145.6301,,EBF,,
+,,Tier2,Tier2: 2014,Tier2: 2014,,,,,,
+AU-Stp,Sturt Plains,"Tier1,",Tier1: 2008,Tier1: 2014,-17.1507,133.3502,,GRA,,
+,,Tier2,Tier2: 2008,Tier2: 2014,,,,,,
+AU-TTE,Ti Tree East,"Tier1,",Tier1: 2012,Tier1: 2013,-22.287,133.64,,OSH,,
+,,Tier2,Tier2: 2012,Tier2: 2014,,,,,,
+AU-Tum,Tumbarumba,"Tier1,",Tier1: 2001,Tier1: 2014,-35.6566,148.1517,1200,EBF,,
+,,Tier2,Tier2: 2001,Tier2: 2014,,,,,,
+AU-Wac,Wallaby Creek,"Tier1,",Tier1: 2005,Tier1: 2008,-37.4259,145.1878,,EBF,,
+,,Tier2,Tier2: 2005,Tier2: 2008,,,,,,
+AU-Whr,Whroo,"Tier1,",Tier1: 2011,Tier1: 2014,-36.6732,145.0294,,EBF,,
+,,Tier2,Tier2: 2011,Tier2: 2014,,,,,,
+AU-Wom,Wombat,"Tier1,",Tier1: 2010,Tier1: 2012,-37.4222,144.0944,705,EBF,,
+,,Tier2,Tier2: 2010,Tier2: 2014,,,,,,
+AU-Ync,Jaxa,"Tier1,",Tier1: 2012,Tier1: 2014,-34.9893,146.2907,,GRA,,
+,,Tier2,Tier2: 2012,Tier2: 2014,,,,,,
+BE-Bra,Brasschaat,"Tier1,",Tier1: 1996,Tier1: 2014,51.3076,4.5198,16,MF,9.8,750
+,,Tier2,Tier2: 1996,Tier2: 2014,,,,,,
+BE-Lon,Lonzee,"Tier1,",Tier1: 2004,Tier1: 2014,50.5516,4.7461,167,CRO,10,800
+,,Tier2,Tier2: 2004,Tier2: 2014,,,,,,
+BE-Vie,Vielsalm,"Tier1,",Tier1: 1996,Tier1: 2014,50.305,5.9981,493,MF,7.8,1062
+,,Tier2,Tier2: 1996,Tier2: 2014,,,,,,
+BR-Sa1,Santarem-Km67-Primary Forest,Tier2,Tier2: 2002,Tier2: 2011,-2.8567,-54.9589,88,EBF,26.13,2075
+BR-Sa3,Santarem-Km83-Logged Forest,"Tier1,",Tier1: 2000,Tier1: 2004,-3.018,-54.9714,100,EBF,26.12,2044
+,,Tier2,Tier2: 2000,Tier2: 2004,,,,,,
+CA-Gro,"Ontario - Groundhog River, Boreal Mixedwood Forest",Tier2,Tier2: 2003,Tier2: 2014,48.2167,-82.1556,340,MF,1.3,831
+CA-Man,Manitoba - Northern Old Black Spruce (former BOREAS Northern Study Area),"Tier1,",Tier1: 1994,Tier1: 2008,55.8796,-98.4808,259,ENF,-3.2,520
+,,Tier2,Tier2: 1994,Tier2: 2008,,,,,,
+CA-NS1,UCI-1850 burn site,"Tier1,",Tier1: 2001,Tier1: 2005,55.8792,-98.4839,260,ENF,-2.89,500
+,,Tier2,Tier2: 2001,Tier2: 2005,,,,,,
+CA-NS2,UCI-1930 burn site,"Tier1,",Tier1: 2001,Tier1: 2005,55.9058,-98.5247,260,ENF,-2.88,500
+,,Tier2,Tier2: 2001,Tier2: 2005,,,,,,
+CA-NS3,UCI-1964 burn site,"Tier1,",Tier1: 2001,Tier1: 2005,55.9117,-98.3822,260,ENF,-2.87,502
+,,Tier2,Tier2: 2001,Tier2: 2005,,,,,,
+CA-NS4,UCI-1964 burn site wet,"Tier1,",Tier1: 2002,Tier1: 2005,55.9144,-98.3806,260,ENF,-2.87,502
+,,Tier2,Tier2: 2002,Tier2: 2005,,,,,,
+CA-NS5,UCI-1981 burn site,"Tier1,",Tier1: 2001,Tier1: 2005,55.8631,-98.485,260,ENF,-2.86,500
+,,Tier2,Tier2: 2001,Tier2: 2005,,,,,,
+CA-NS6,UCI-1989 burn site,"Tier1,",Tier1: 2001,Tier1: 2005,55.9167,-98.9644,244,OSH,-3.08,495
+,,Tier2,Tier2: 2001,Tier2: 2005,,,,,,
+CA-NS7,UCI-1998 burn site,"Tier1,",Tier1: 2002,Tier1: 2005,56.6358,-99.9483,297,OSH,-3.52,483
+,,Tier2,Tier2: 2002,Tier2: 2005,,,,,,
+CA-Oas,"Saskatchewan - Western Boreal, Mature Aspen",Tier2,Tier2: 1996,Tier2: 2010,53.6289,-106.1978,530,DBF,0.34,429
+CA-Obs,"Saskatchewan - Western Boreal, Mature Black Spruce",Tier2,Tier2: 1997,Tier2: 2010,53.9872,-105.1178,628.94,ENF,0.79,406
+CA-Qfo,"Quebec - Eastern Boreal, Mature Black Spruce","Tier1,",Tier1: 2003,Tier1: 2010,49.6925,-74.3421,382,ENF,-0.36,962
+,,Tier2,Tier2: 2003,Tier2: 2010,,,,,,
+CA-SF1,"Saskatchewan - Western Boreal, forest burned in 1977","Tier1,",Tier1: 2003,Tier1: 2006,54.485,-105.8176,536,ENF,0.4,470
+,,Tier2,Tier2: 2003,Tier2: 2006,,,,,,
+CA-SF2,"Saskatchewan - Western Boreal, forest burned in 1989","Tier1,",Tier1: 2001,Tier1: 2005,54.2539,-105.8775,520,ENF,0.4,470
+,,Tier2,Tier2: 2001,Tier2: 2005,,,,,,
+CA-SF3,"Saskatchewan - Western Boreal, forest burned in 1998","Tier1,",Tier1: 2001,Tier1: 2006,54.0916,-106.0053,540,OSH,0.4,470
+,,Tier2,Tier2: 2001,Tier2: 2006,,,,,,
+CA-TP1,Ontario - Turkey Point 2002 Plantation White Pine,Tier2,Tier2: 2002,Tier2: 2014,42.6609,-80.5595,265,ENF,8,1036
+CA-TP2,Ontario - Turkey Point 1989 Plantation White Pine,Tier2,Tier2: 2002,Tier2: 2007,42.7744,-80.4588,212,ENF,8,1036
+CA-TP3,Ontario - Turkey Point 1974 Plantation White Pine,Tier2,Tier2: 2002,Tier2: 2014,42.7068,-80.3483,184,ENF,8,1036
+CA-TP4,Ontario - Turkey Point 1939 Plantation White Pine,Tier2,Tier2: 2002,Tier2: 2014,42.7102,-80.3574,184,ENF,8,1036
+CA-TPD,Ontario - Turkey Point Mature Deciduous,Tier2,Tier2: 2012,Tier2: 2014,42.6353,-80.5577,260,DBF,8,1036
+CG-Tch,Tchizalamou,Tier2,Tier2: 2006,Tier2: 2009,-4.2892,11.6564,82,SAV,25.7,1150
+CH-Cha,Chamau,"Tier1,",Tier1: 2005,Tier1: 2014,47.2102,8.4104,393,GRA,9.5,1136
+,,Tier2,Tier2: 2005,Tier2: 2014,,,,,,
+CH-Dav,Davos,"Tier1,",Tier1: 1997,Tier1: 2014,46.8153,9.8559,1639,ENF,2.8,1062
+,,Tier2,Tier2: 1997,Tier2: 2014,,,,,,
+CH-Fru,Früebüel ,"Tier1,",Tier1: 2005,Tier1: 2014,47.1158,8.5378,982,GRA,7.2,1651
+,,Tier2,Tier2: 2005,Tier2: 2014,,,,,,
+CH-Lae,Laegern,"Tier1,",Tier1: 2004,Tier1: 2014,47.4781,8.365,689,MF,8.3,1100
+,,Tier2,Tier2: 2004,Tier2: 2014,,,,,,
+CH-Oe1,Oensingen grassland,"Tier1,",Tier1: 2002,Tier1: 2008,47.2858,7.7319,450,GRA,9,1100
+,,Tier2,Tier2: 2002,Tier2: 2008,,,,,,
+CH-Oe2,Oensingen crop,"Tier1,",Tier1: 2004,Tier1: 2014,47.2863,7.7343,452,CRO,9.8,1155
+,,Tier2,Tier2: 2004,Tier2: 2014,,,,,,
+CN-Cha,Changbaishan,"Tier1,",Tier1: 2003,Tier1: 2005,42.4025,128.0958,,MF,,
+,,Tier2,Tier2: 2003,Tier2: 2005,,,,,,
+CN-Cng,Changling,"Tier1,",Tier1: 2007,Tier1: 2010,44.5934,123.5092,,GRA,,
+,,Tier2,Tier2: 2007,Tier2: 2010,,,,,,
+CN-Dan,Dangxiong,"Tier1,",Tier1: 2004,Tier1: 2005,30.4978,91.0664,,GRA,,
+,,Tier2,Tier2: 2004,Tier2: 2005,,,,,,
+CN-Din,Dinghushan,"Tier1,",Tier1: 2003,Tier1: 2005,23.1733,112.5361,,EBF,,
+,,Tier2,Tier2: 2003,Tier2: 2005,,,,,,
+CN-Du2,Duolun_grassland (D01),"Tier1,",Tier1: 2006,Tier1: 2008,42.0467,116.2836,,GRA,,
+,,Tier2,Tier2: 2006,Tier2: 2008,,,,,,
+CN-Du3,Duolun Degraded Meadow,Tier2,Tier2: 2009,Tier2: 2010,42.0551,116.2809,,GRA,,
+CN-Ha2,Haibei Shrubland,"Tier1,",Tier1: 2003,Tier1: 2005,37.6086,101.3269,,WET,,
+,,Tier2,Tier2: 2003,Tier2: 2005,,,,,,
+CN-HaM,Haibei Alpine Tibet site,"Tier1,",Tier1: 2002,Tier1: 2004,37.37,101.18,,GRA,,
+,,Tier2,Tier2: 2002,Tier2: 2004,,,,,,
+CN-Qia,Qianyanzhou,"Tier1,",Tier1: 2003,Tier1: 2005,26.7414,115.0581,,ENF,,
+,,Tier2,Tier2: 2003,Tier2: 2005,,,,,,
+CN-Sw2,Siziwang Grazed (SZWG),"Tier1,",Tier1: 2010,Tier1: 2012,41.7902,111.8971,,GRA,,
+,,Tier2,Tier2: 2010,Tier2: 2012,,,,,,
+CZ-BK1,Bily Kriz forest,"Tier1,",Tier1: 2004,Tier1: 2008,49.5021,18.5369,875,ENF,6.7,1316
+,,Tier2,Tier2: 2004,Tier2: 2014,,,,,,
+CZ-BK2,Bily Kriz grassland,"Tier1,",Tier1: 2004,Tier1: 2006,49.4944,18.5429,855,GRA,6.7,1316
+,,Tier2,Tier2: 2004,Tier2: 2012,,,,,,
+CZ-wet,Trebon (CZECHWET),"Tier1,",Tier1: 2006,Tier1: 2014,49.0247,14.7704,426,WET,7.7,604
+,,Tier2,Tier2: 2006,Tier2: 2014,,,,,,
+DE-Akm,Anklam,"Tier1,",Tier1: 2009,Tier1: 2014,53.8662,13.6834,-1,WET,8.7,558
+,,Tier2,Tier2: 2009,Tier2: 2014,,,,,,
+DE-Geb,Gebesee,"Tier1,",Tier1: 2001,Tier1: 2014,51.1001,10.9143,161.5,CRO,8.5,470
+,,Tier2,Tier2: 2001,Tier2: 2014,,,,,,
+DE-Gri,Grillenburg,"Tier1,",Tier1: 2004,Tier1: 2014,50.95,13.5126,385,GRA,7.8,901
+,,Tier2,Tier2: 2004,Tier2: 2014,,,,,,
+DE-Hai,Hainich,"Tier1,",Tier1: 2000,Tier1: 2012,51.0792,10.453,430,DBF,8.3,720
+,,Tier2,Tier2: 2000,Tier2: 2012,,,,,,
+DE-Kli,Klingenberg,"Tier1,",Tier1: 2004,Tier1: 2014,50.8931,13.5224,478,CRO,7.6,842
+,,Tier2,Tier2: 2004,Tier2: 2014,,,,,,
+DE-Lkb,Lackenberg,"Tier1,",Tier1: 2009,Tier1: 2013,49.0996,13.3047,1308,ENF,4,1599
+,,Tier2,Tier2: 2009,Tier2: 2013,,,,,,
+DE-Lnf,Leinefelde,Tier2,Tier2: 2002,Tier2: 2012,51.3282,10.3678,451,DBF,,
+DE-Obe,Oberbärenburg,"Tier1,",Tier1: 2008,Tier1: 2014,50.7867,13.7213,734,ENF,5.5,996
+,,Tier2,Tier2: 2008,Tier2: 2014,,,,,,
+DE-RuR,Rollesbroich,"Tier1,",Tier1: 2011,Tier1: 2014,50.6219,6.3041,514.7,GRA,7.7,1033
+,,Tier2,Tier2: 2011,Tier2: 2014,,,,,,
+DE-RuS,Selhausen Juelich,"Tier1,",Tier1: 2011,Tier1: 2014,50.8659,6.4472,102.76,CRO,10,700
+,,Tier2,Tier2: 2011,Tier2: 2014,,,,,,
+DE-Seh,Selhausen,"Tier1,",Tier1: 2007,Tier1: 2010,50.8706,6.4497,103,CRO,9.9,693
+,,Tier2,Tier2: 2007,Tier2: 2010,,,,,,
+DE-SfN,Schechenfilz Nord,"Tier1,",Tier1: 2012,Tier1: 2014,47.8064,11.3275,590,WET,8.6,1127
+,,Tier2,Tier2: 2012,Tier2: 2014,,,,,,
+DE-Spw,Spreewald,"Tier1,",Tier1: 2010,Tier1: 2014,51.8923,14.0337,61,WET,8.7,558
+,,Tier2,Tier2: 2010,Tier2: 2014,,,,,,
+DE-Tha,Tharandt,"Tier1,",Tier1: 1996,Tier1: 2014,50.9624,13.5652,385,ENF,8.2,843
+,,Tier2,Tier2: 1996,Tier2: 2014,,,,,,
+DE-Zrk,Zarnekow,Tier2,Tier2: 2013,Tier2: 2014,53.8759,12.889,0,WET,8.7,584
+DK-Eng,Enghave,Tier2,Tier2: 2005,Tier2: 2008,55.6905,12.1918,10,GRA,8,613
+DK-Fou,Foulum,"Tier1,",Tier1: 2005,Tier1: 2005,56.4842,9.5872,51,CRO,8,
+,,Tier2,Tier2: 2005,Tier2: 2005,,,,,,
+DK-NuF,Nuuk Fen,"Tier1,",Tier1: 2008,Tier1: 2014,64.1308,-51.3861,50,WET,-1.4,750
+,,Tier2,Tier2: 2008,Tier2: 2014,,,,,,
+DK-Sor,Soroe,"Tier1,",Tier1: 1996,Tier1: 2014,55.4859,11.6446,40,DBF,8.2,660
+,,Tier2,Tier2: 1996,Tier2: 2014,,,,,,
+DK-ZaF,Zackenberg Fen,"Tier1,",Tier1: 2008,Tier1: 2011,74.4814,-20.5545,38,WET,-9,211
+,,Tier2,Tier2: 2008,Tier2: 2011,,,,,,
+DK-ZaH,Zackenberg Heath,"Tier1,",Tier1: 2000,Tier1: 2014,74.4733,-20.5503,38,GRA,-9,211
+,,Tier2,Tier2: 2000,Tier2: 2014,,,,,,
+ES-Amo,Amoladeras,Tier2,Tier2: 2007,Tier2: 2012,36.8336,-2.2523,58,OSH,,0
+ES-LgS,Laguna Seca,"Tier1,",Tier1: 2007,Tier1: 2009,37.0979,-2.9658,2267,OSH,,
+,,Tier2,Tier2: 2007,Tier2: 2009,,,,,,
+ES-LJu,Llano de los Juanes,Tier2,Tier2: 2004,Tier2: 2013,36.9266,-2.7521,1600,OSH,16,400
+ES-Ln2,Lanjaron-Salvage logging,"Tier1,",Tier1: 2009,Tier1: 2009,36.9695,-3.4758,2249,OSH,,
+,,Tier2,Tier2: 2009,Tier2: 2009,,,,,,
+FI-Hyy,Hyytiala,"Tier1,",Tier1: 1996,Tier1: 2014,61.8474,24.2948,181,ENF,3.8,709
+,,Tier2,Tier2: 1996,Tier2: 2014,,,,,,
+FI-Jok,Jokioinen,"Tier1,",Tier1: 2000,Tier1: 2003,60.8986,23.5135,109,CRO,4.6,627
+,,Tier2,Tier2: 2000,Tier2: 2003,,,,,,
+FI-Let,Lettosuo,Tier2,Tier2: 2009,Tier2: 2012,60.6418,23.9595,119,ENF,,
+FI-Lom,Lompolojankka,"Tier1,",Tier1: 2007,Tier1: 2009,67.9972,24.2092,274,WET,-1.4,484
+,,Tier2,Tier2: 2007,Tier2: 2009,,,,,,
+FI-Sod,Sodankyla,"Tier1,",Tier1: 2001,Tier1: 2014,67.3624,26.6386,180,ENF,-1,500
+,,Tier2,Tier2: 2001,Tier2: 2014,,,,,,
+FR-Fon,Fontainebleau-Barbeau,"Tier1,",Tier1: 2005,Tier1: 2014,48.4764,2.7801,103,DBF,10.2,720
+,,Tier2,Tier2: 2005,Tier2: 2014,,,,,,
+FR-Gri,Grignon,"Tier1,",Tier1: 2004,Tier1: 2013,48.8442,1.9519,125,CRO,12,650
+,,Tier2,Tier2: 2004,Tier2: 2014,,,,,,
+FR-LBr,Le Bray,"Tier1,",Tier1: 1996,Tier1: 2008,44.7171,-0.7693,61,ENF,13.6,900
+,,Tier2,Tier2: 1996,Tier2: 2008,,,,,,
+FR-Pue,Puechabon,"Tier1,",Tier1: 2000,Tier1: 2014,43.7413,3.5957,270,EBF,13.5,883
+,,Tier2,Tier2: 2000,Tier2: 2014,,,,,,
+GF-Guy,Guyaflux (French Guiana),"Tier1,",Tier1: 2004,Tier1: 2014,5.2788,-52.9249,48,EBF,25.7,3041
+,,Tier2,Tier2: 2004,Tier2: 2014,,,,,,
+GH-Ank,Ankasa,Tier2,Tier2: 2011,Tier2: 2014,5.2685,-2.6942,124,EBF,26,1900
+IT-BCi,Borgo Cioffi,"Tier1,",Tier1: 2004,Tier1: 2014,40.5238,14.9574,20,CRO,18,600
+,,Tier2,Tier2: 2004,Tier2: 2014,,,,,,
+IT-CA1,Castel d'Asso1,"Tier1,",Tier1: 2011,Tier1: 2014,42.3804,12.0266,200,DBF,14,766
+,,Tier2,Tier2: 2011,Tier2: 2014,,,,,,
+IT-CA2,Castel d'Asso2,"Tier1,",Tier1: 2011,Tier1: 2014,42.3772,12.026,200,CRO,14,766
+,,Tier2,Tier2: 2011,Tier2: 2014,,,,,,
+IT-CA3,Castel d'Asso 3,"Tier1,",Tier1: 2011,Tier1: 2014,42.38,12.0222,197,DBF,14,766
+,,Tier2,Tier2: 2011,Tier2: 2014,,,,,,
+IT-Col,Collelongo,"Tier1,",Tier1: 1996,Tier1: 2014,41.8494,13.5881,1560,DBF,6.3,1180
+,,Tier2,Tier2: 1996,Tier2: 2014,,,,,,
+IT-Cp2,Castelporziano2,"Tier1,",Tier1: 2012,Tier1: 2014,41.7043,12.3573,19,EBF,15.2,805
+,,Tier2,Tier2: 2012,Tier2: 2014,,,,,,
+IT-Cpz,Castelporziano,"Tier1,",Tier1: 1997,Tier1: 2009,41.7053,12.3761,68,EBF,15.6,780
+,,Tier2,Tier2: 1997,Tier2: 2009,,,,,,
+IT-Isp,Ispra ABC-IS,"Tier1,",Tier1: 2013,Tier1: 2014,45.8126,8.6336,210,DBF,12.2,1300
+,,Tier2,Tier2: 2013,Tier2: 2014,,,,,,
+IT-La2,Lavarone2,"Tier1,",Tier1: 2000,Tier1: 2002,45.9542,11.2853,1350,ENF,7.2,1150
+,,Tier2,Tier2: 2000,Tier2: 2002,,,,,,
+IT-Lav,Lavarone,"Tier1,",Tier1: 2003,Tier1: 2014,45.9562,11.2813,1353,ENF,7.8,1291
+,,Tier2,Tier2: 2003,Tier2: 2014,,,,,,
+IT-MBo,Monte Bondone,"Tier1,",Tier1: 2003,Tier1: 2013,46.0147,11.0458,1550,GRA,5.1,1214
+,,Tier2,Tier2: 2003,Tier2: 2013,,,,,,
+IT-Noe,Arca di Noe - Le Prigionette,"Tier1,",Tier1: 2004,Tier1: 2014,40.6062,8.1512,25,CSH,15.9,588
+,,Tier2,Tier2: 2004,Tier2: 2014,,,,,,
+IT-PT1,Parco Ticino forest,"Tier1,",Tier1: 2002,Tier1: 2004,45.2009,9.061,60,DBF,12.7,984
+,,Tier2,Tier2: 2002,Tier2: 2004,,,,,,
+IT-Ren,Renon,"Tier1,",Tier1: 1998,Tier1: 2013,46.5869,11.4337,1730,ENF,4.7,809
+,,Tier2,Tier2: 1998,Tier2: 2013,,,,,,
+IT-Ro1,Roccarespampani 1,"Tier1,",Tier1: 2000,Tier1: 2008,42.4081,11.93,235,DBF,15.15,876
+,,Tier2,Tier2: 2000,Tier2: 2008,,,,,,
+IT-Ro2,Roccarespampani 2,"Tier1,",Tier1: 2002,Tier1: 2012,42.3903,11.9209,160,DBF,15.15,876
+,,Tier2,Tier2: 2002,Tier2: 2012,,,,,,
+IT-SR2,San Rossore 2,"Tier1,",Tier1: 2013,Tier1: 2014,43.732,10.291,4,ENF,14.2,920
+,,Tier2,Tier2: 2013,Tier2: 2014,,,,,,
+IT-SRo,San Rossore,"Tier1,",Tier1: 1999,Tier1: 2012,43.7279,10.2844,6,ENF,14.2,920
+,,Tier2,Tier2: 1999,Tier2: 2012,,,,,,
+IT-Tor,Torgnon,"Tier1,",Tier1: 2008,Tier1: 2014,45.8444,7.5781,2160,GRA,2.9,920
+,,Tier2,Tier2: 2008,Tier2: 2014,,,,,,
+JP-MBF,Moshiri Birch Forest Site,"Tier1,",Tier1: 2003,Tier1: 2005,44.3869,142.3186,,DBF,,
+,,Tier2,Tier2: 2003,Tier2: 2005,,,,,,
+JP-SMF,Seto Mixed Forest Site,"Tier1,",Tier1: 2002,Tier1: 2006,35.2617,137.0788,,MF,,
+,,Tier2,Tier2: 2002,Tier2: 2006,,,,,,
+MY-PSO,Pasoh Forest Reserve (PSO),Tier2,Tier2: 2003,Tier2: 2009,2.973,102.3062,,EBF,,
+NL-Hor,Horstermeer,"Tier1,",Tier1: 2004,Tier1: 2011,52.2404,5.0713,2.2,GRA,10,800
+,,Tier2,Tier2: 2004,Tier2: 2011,,,,,,
+NL-Loo,Loobos,"Tier1,",Tier1: 1996,Tier1: 2013,52.1666,5.7436,25,ENF,9.8,786
+,,Tier2,Tier2: 1996,Tier2: 2014,,,,,,
+NO-Adv,Adventdalen,"Tier1,",Tier1: 2011,Tier1: 2014,78.186,15.923,17,WET,,
+,,Tier2,Tier2: 2011,Tier2: 2014,,,,,,
+NO-Blv,"Bayelva, Spitsbergen","Tier1,",Tier1: 2008,Tier1: 2009,78.9216,11.8311,25,SNO,-4.5,400
+,,Tier2,Tier2: 2008,Tier2: 2009,,,,,,
+PA-SPn,Sardinilla Plantation,Tier2,Tier2: 2007,Tier2: 2009,9.3181,-79.6346,78,DBF,26.5,2350
+PA-SPs,Sardinilla-Pasture,Tier2,Tier2: 2007,Tier2: 2009,9.3138,-79.6314,68,GRA,26.5,2350
+RU-Che,Cherski,"Tier1,",Tier1: 2002,Tier1: 2005,68.613,161.3414,6,WET,-11,197
+,,Tier2,Tier2: 2002,Tier2: 2005,,,,,,
+RU-Cok,Chokurdakh,"Tier1,",Tier1: 2003,Tier1: 2014,70.8291,147.4943,48,OSH,-14.3,232
+,,Tier2,Tier2: 2003,Tier2: 2014,,,,,,
+RU-Fyo,Fyodorovskoye,"Tier1,",Tier1: 1998,Tier1: 2014,56.4615,32.9221,265,ENF,3.9,711
+,,Tier2,Tier2: 1998,Tier2: 2014,,,,,,
+RU-Ha1,Hakasia steppe,"Tier1,",Tier1: 2002,Tier1: 2004,54.7252,90.0022,446,GRA,,
+,,Tier2,Tier2: 2002,Tier2: 2004,,,,,,
+RU-Sam,Samoylov,Tier2,Tier2: 2002,Tier2: 2014,72.3738,126.4958,,GRA,,
+RU-SkP,Yakutsk Spasskaya Pad larch,Tier2,Tier2: 2012,Tier2: 2014,62.255,129.168,246,DNF,,
+RU-Tks,Tiksi,Tier2,Tier2: 2010,Tier2: 2014,71.5943,128.8878,7,GRA,-12.7,323
+RU-Vrk,Seida/Vorkuta,Tier2,Tier2: 2008,Tier2: 2008,67.0547,62.9405,100,CSH,-5.6,501
+SD-Dem,Demokeya,"Tier1,",Tier1: 2005,Tier1: 2009,13.2829,30.4783,500,SAV,26,320
+,,Tier2,Tier2: 2005,Tier2: 2009,,,,,,
+SE-St1,Stordalen grassland,Tier2,Tier2: 2012,Tier2: 2014,68.3542,19.0503,351,WET,-0.7,303
+SN-Dhr,Dahra,"Tier1,",Tier1: 2010,Tier1: 2013,15.4028,-15.4322,40,SAV,29,404
+,,Tier2,Tier2: 2010,Tier2: 2013,,,,,,
+US-AR1,ARM USDA UNL OSU Woodward Switchgrass 1,"Tier1,",Tier1: 2009,Tier1: 2012,36.4267,-99.42,611,GRA,,
+,,Tier2,Tier2: 2009,Tier2: 2012,,,,,,
+US-AR2,ARM USDA UNL OSU Woodward Switchgrass 2,"Tier1,",Tier1: 2009,Tier1: 2012,36.6358,-99.5975,646,GRA,,
+,,Tier2,Tier2: 2009,Tier2: 2012,,,,,,
+US-ARb,ARM Southern Great Plains burn site- Lamont,"Tier1,",Tier1: 2005,Tier1: 2006,35.5497,-98.0402,424,GRA,,
+,,Tier2,Tier2: 2005,Tier2: 2006,,,,,,
+US-ARc,ARM Southern Great Plains control site- Lamont,"Tier1,",Tier1: 2005,Tier1: 2006,35.5465,-98.04,424,GRA,,
+,,Tier2,Tier2: 2005,Tier2: 2006,,,,,,
+US-ARM,ARM Southern Great Plains site- Lamont,"Tier1,",Tier1: 2003,Tier1: 2012,36.6058,-97.4888,314,CRO,14.76,843
+,,Tier2,Tier2: 2003,Tier2: 2012,,,,,,
+US-Atq,Atqasuk,Tier2,Tier2: 2003,Tier2: 2008,70.4696,-157.4089,15,WET,-9.7,93
+US-Blo,Blodgett Forest,"Tier1,",Tier1: 1997,Tier1: 2007,38.8953,-120.6328,1315,ENF,11.09,1226
+,,Tier2,Tier2: 1997,Tier2: 2007,,,,,,
+US-Cop,Corral Pocket,"Tier1,",Tier1: 2001,Tier1: 2007,38.09,-109.39,1520,GRA,,
+,,Tier2,Tier2: 2001,Tier2: 2007,,,,,,
+US-CRT,Curtice Walter-Berger cropland,Tier2,Tier2: 2011,Tier2: 2013,41.6285,-83.3471,180,CRO,10.1,849
+US-GBT,GLEES Brooklyn Tower,"Tier1,",Tier1: 1999,Tier1: 2006,41.3658,-106.2397,3191,ENF,0.8,1200
+,,Tier2,Tier2: 1999,Tier2: 2006,,,,,,
+US-GLE,GLEES,"Tier1,",Tier1: 2004,Tier1: 2014,41.3665,-106.2399,3197,ENF,0.8,1200
+,,Tier2,Tier2: 2004,Tier2: 2014,,,,,,
+US-Goo,Goodwin Creek,Tier2,Tier2: 2002,Tier2: 2006,34.2547,-89.8735,87,GRA,15.89,1426
+US-Ha1,Harvard Forest EMS Tower (HFR1),"Tier1,",Tier1: 1991,Tier1: 2012,42.5378,-72.1715,340,DBF,6.62,1071
+,,Tier2,Tier2: 1991,Tier2: 2012,,,,,,
+US-IB2,Fermi National Accelerator Laboratory- Batavia (Prairie site),Tier2,Tier2: 2004,Tier2: 2011,41.8406,-88.241,226.5,GRA,9.04,930
+US-Ivo,Ivotuk,Tier2,Tier2: 2004,Tier2: 2007,68.4865,-155.7503,568,WET,-8.28,304
+US-KS1,Kennedy Space Center (slash pine),Tier2,Tier2: 2002,Tier2: 2002,28.4583,-80.6709,1,ENF,21.9,1266
+US-KS2,Kennedy Space Center (scrub oak),"Tier1,",Tier1: 2003,Tier1: 2006,28.6086,-80.6715,3,CSH,21.66,1294
+,,Tier2,Tier2: 2003,Tier2: 2006,,,,,,
+US-Lin,Lindcove Orange Orchard,Tier2,Tier2: 2009,Tier2: 2010,36.3566,-119.8423,131,CRO,,
+US-Los,Lost Creek,"Tier1,",Tier1: 2000,Tier1: 2014,46.0827,-89.9792,480,WET,4.08,828
+,,Tier2,Tier2: 2000,Tier2: 2014,,,,,,
+US-LWW,Little Washita Watershed,Tier2,Tier2: 1997,Tier2: 1998,34.9604,-97.9789,365,GRA,16.09,805
+US-Me1,Metolius - Eyerly burn,"Tier1,",Tier1: 2004,Tier1: 2005,44.5794,-121.5,896,ENF,7.88,705
+,,Tier2,Tier2: 2004,Tier2: 2005,,,,,,
+US-Me2,Metolius mature ponderosa pine,"Tier1,",Tier1: 2002,Tier1: 2014,44.4523,-121.5574,1253,ENF,6.28,523
+,,Tier2,Tier2: 2002,Tier2: 2014,,,,,,
+US-Me3,Metolius-second young aged pine,Tier2,Tier2: 2004,Tier2: 2009,44.3154,-121.6078,1005,ENF,7.07,719
+US-Me4,Metolius-old aged ponderosa pine,Tier2,Tier2: 1996,Tier2: 2000,44.4992,-121.6224,922,ENF,7.61,1039
+US-Me5,Metolius-first young aged pine,Tier2,Tier2: 2000,Tier2: 2002,44.4372,-121.5668,1188,ENF,6.47,591
+US-Me6,Metolius Young Pine Burn,"Tier1,",Tier1: 2010,Tier1: 2014,44.3233,-121.6078,998,ENF,7.59,494
+,,Tier2,Tier2: 2010,Tier2: 2014,,,,,,
+US-MMS,Morgan Monroe State Forest,"Tier1,",Tier1: 1999,Tier1: 2014,39.3232,-86.4131,275,DBF,10.85,1032
+,,Tier2,Tier2: 1999,Tier2: 2014,,,,,,
+US-Myb,Mayberry Wetland,"Tier1,",Tier1: 2010,Tier1: 2014,38.0498,-121.7651,-1,WET,15.9,338
+,,Tier2,Tier2: 2010,Tier2: 2014,,,,,,
+US-Ne1,Mead - irrigated continuous maize site,"Tier1,",Tier1: 2001,Tier1: 2013,41.1651,-96.4766,361,CRO,10.07,790
+,,Tier2,Tier2: 2001,Tier2: 2013,,,,,,
+US-Ne2,Mead - irrigated maize-soybean rotation site,"Tier1,",Tier1: 2001,Tier1: 2013,41.1649,-96.4701,362,CRO,10.08,789
+,,Tier2,Tier2: 2001,Tier2: 2013,,,,,,
+US-Ne3,Mead - rainfed maize-soybean rotation site,"Tier1,",Tier1: 2001,Tier1: 2013,41.1797,-96.4397,363,CRO,10.11,784
+,,Tier2,Tier2: 2001,Tier2: 2013,,,,,,
+US-NR1,Niwot Ridge Forest (LTER NWT1),"Tier1,",Tier1: 1998,Tier1: 2014,40.0329,-105.5464,3050,ENF,1.5,800
+,,Tier2,Tier2: 1998,Tier2: 2014,,,,,,
+US-Oho,Oak Openings,Tier2,Tier2: 2004,Tier2: 2013,41.5545,-83.8438,230,DBF,10.1,849
+US-ORv,Olentangy River Wetland Research Park,"Tier1,",Tier1: 2011,Tier1: 2011,40.0201,-83.0183,221,WET,11.63,1499
+,,Tier2,Tier2: 2011,Tier2: 2011,,,,,,
+US-PFa,Park Falls/WLEF,"Tier1,",Tier1: 1995,Tier1: 2014,45.9459,-90.2723,470,MF,4.33,823
+,,Tier2,Tier2: 1995,Tier2: 2014,,,,,,
+US-Prr,Poker Flat Research Range Black Spruce Forest,"Tier1,",Tier1: 2010,Tier1: 2013,65.1237,-147.4876,210,ENF,-2,275
+,,Tier2,Tier2: 2010,Tier2: 2014,,,,,,
+US-SRC,Santa Rita Creosote,Tier2,Tier2: 2008,Tier2: 2014,31.9083,-110.8395,991,OSH,,
+US-SRG,Santa Rita Grassland,"Tier1,",Tier1: 2008,Tier1: 2014,31.7894,-110.8277,1291,GRA,17,420
+,,Tier2,Tier2: 2008,Tier2: 2014,,,,,,
+US-SRM,Santa Rita Mesquite,"Tier1,",Tier1: 2004,Tier1: 2014,31.8214,-110.8661,1120,WSA,17.92,380
+,,Tier2,Tier2: 2004,Tier2: 2014,,,,,,
+US-Sta,Saratoga,Tier2,Tier2: 2005,Tier2: 2009,41.3966,-106.8024,2069,OSH,5.1,
+US-Syv,Sylvania Wilderness Area,"Tier1,",Tier1: 2001,Tier1: 2014,46.242,-89.3477,540,MF,3.81,826
+,,Tier2,Tier2: 2001,Tier2: 2014,,,,,,
+US-Ton,Tonzi Ranch,"Tier1,",Tier1: 2001,Tier1: 2014,38.4316,-120.966,177,WSA,15.8,559
+,,Tier2,Tier2: 2001,Tier2: 2014,,,,,,
+US-Tw1,Twitchell Wetland West Pond,"Tier1,",Tier1: 2012,Tier1: 2014,38.1074,-121.6469,-9,WET,15.5,421
+,,Tier2,Tier2: 2012,Tier2: 2014,,,,,,
+US-Tw2,Twitchell Corn,"Tier1,",Tier1: 2012,Tier1: 2013,38.1047,-121.6433,-5,CRO,15.5,421
+,,Tier2,Tier2: 2012,Tier2: 2013,,,,,,
+US-Tw3,Twitchell Alfalfa,"Tier1,",Tier1: 2013,Tier1: 2014,38.1159,-121.6467,-9,CRO,15.6,421
+,,Tier2,Tier2: 2013,Tier2: 2014,,,,,,
+US-Tw4,Twitchell East End Wetland,"Tier1,",Tier1: 2013,Tier1: 2014,38.103,-121.6414,-5,WET,15.6,421
+,,Tier2,Tier2: 2013,Tier2: 2014,,,,,,
+US-Twt,Twitchell Island,"Tier1,",Tier1: 2009,Tier1: 2014,38.1087,-121.653,,CRO,15.6,421
+,,Tier2,Tier2: 2009,Tier2: 2014,,,,,,
+US-UMB,Univ. of Mich. Biological Station,"Tier1,",Tier1: 2000,Tier1: 2014,45.5598,-84.7138,234,DBF,5.83,803
+,,Tier2,Tier2: 2000,Tier2: 2014,,,,,,
+US-UMd,UMBS Disturbance,"Tier1,",Tier1: 2007,Tier1: 2014,45.5625,-84.6975,239,DBF,5.83,803
+,,Tier2,Tier2: 2007,Tier2: 2014,,,,,,
+US-Var,Vaira Ranch- Ione,"Tier1,",Tier1: 2000,Tier1: 2014,38.4133,-120.9507,129,GRA,15.8,559
+,,Tier2,Tier2: 2000,Tier2: 2014,,,,,,
+US-WCr,Willow Creek,"Tier1,",Tier1: 1999,Tier1: 2014,45.8059,-90.0799,520,DBF,4.02,787
+,,Tier2,Tier2: 1999,Tier2: 2014,,,,,,
+US-Whs,Walnut Gulch Lucky Hills Shrub,"Tier1,",Tier1: 2007,Tier1: 2014,31.7438,-110.0522,1370,OSH,17.6,320
+,,Tier2,Tier2: 2007,Tier2: 2014,,,,,,
+US-Wi0,Young red pine (YRP),"Tier1,",Tier1: 2002,Tier1: 2002,46.6188,-91.0814,349,ENF,,
+,,Tier2,Tier2: 2002,Tier2: 2002,,,,,,
+US-Wi1,Intermediate hardwood (IHW),Tier2,Tier2: 2003,Tier2: 2003,46.7305,-91.2329,352,DBF,,
+US-Wi2,Intermediate red pine (IRP),Tier2,Tier2: 2003,Tier2: 2003,46.6869,-91.1528,395,ENF,,
+US-Wi3,Mature hardwood (MHW),"Tier1,",Tier1: 2002,Tier1: 2004,46.6347,-91.0987,411,DBF,,
+,,Tier2,Tier2: 2002,Tier2: 2004,,,,,,
+US-Wi4,Mature red pine (MRP),"Tier1,",Tier1: 2002,Tier1: 2005,46.7393,-91.1663,352,ENF,,
+,,Tier2,Tier2: 2002,Tier2: 2005,,,,,,
+US-Wi5,Mixed young jack pine (MYJP),Tier2,Tier2: 2004,Tier2: 2004,46.6531,-91.0858,353,ENF,,
+US-Wi6,Pine barrens #1 (PB1),"Tier1,",Tier1: 2002,Tier1: 2003,46.6249,-91.2982,371,OSH,,
+,,Tier2,Tier2: 2002,Tier2: 2003,,,,,,
+US-Wi7,Red pine clearcut (RPCC),Tier2,Tier2: 2005,Tier2: 2005,46.6491,-91.0693,335,OSH,,
+US-Wi8,Young hardwood clearcut (YHW),Tier2,Tier2: 2002,Tier2: 2002,46.7223,-91.2524,348,DBF,,
+US-Wi9,Young Jack pine (YJP),"Tier1,",Tier1: 2004,Tier1: 2005,46.6188,-91.0814,350,ENF,,
+,,Tier2,Tier2: 2004,Tier2: 2005,,,,,,
+US-Wkg,Walnut Gulch Kendall Grasslands,"Tier1,",Tier1: 2004,Tier1: 2014,31.7365,-109.9419,1531,GRA,15.64,407
+,,Tier2,Tier2: 2004,Tier2: 2014,,,,,,
+US-WPT,Winous Point North Marsh,Tier2,Tier2: 2011,Tier2: 2013,41.4646,-82.9962,175,WET,10.1,849
+ZA-Kru,Skukuza,"Tier1,",Tier1: 2000,Tier1: 2010,-25.0197,31.4969,359,SAV,21.9,547
+,,Tier2,Tier2: 2000,Tier2: 2013,,,,,,
+ZM-Mon,Mongu,"Tier1,",Tier1: 2000,Tier1: 2009,-15.4378,23.2528,1053,DBF,25,945
+,,Tier2,Tier2: 2000,Tier2: 2009,,,,,,

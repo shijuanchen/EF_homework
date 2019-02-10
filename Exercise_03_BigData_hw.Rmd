@@ -98,26 +98,30 @@ recent <- fia_table[which(update > "2018/01/01"),]
 Create a sorted table of how many FLUXNET eddy-covariance towers are in each country according to the website at http://fluxnet.fluxdata.org/sites/site-list-and-pages/. Hint: use substring to extract the country code from the overall FLUXNET ID code.
 
 ```{r}
-FLUXNET_html <- getURL("http://fluxnet.fluxdata.org/sites/site-list-and-pages/")  ## this doesn't work
-FLUXNET_table = readHTMLTable(FLUXNET_html)    ## this doesn't work
-print(FLUXNET_table)
-#Loading the rvest package
-library('rvest')
-url <- 'http://fluxnet.fluxdata.org/sites/site-list-and-pages/'
-#Reading the HTML code from the website
-webpage <- read_html(url)
-#Install SelectorGadget, and Using CSS selectors to scrap the site_ID section
-siteTable_html <- html_nodes(webpage,'td , a') 
-siteTable_html
-siteTable_html[26]
-siteID_html <- html_nodes(webpage,'tbody td:nth-child(1)')
-siteID_html
-siteID <- html_text(siteID_html)
-siteID
-head(siteID) # I am sorry that I don't know how to do it...
-
-site_list <- readHTMLTable('Site_list_FLUXNET_2015.html')
-site_list
+# # I tried the following codes, but it doesn't work...
+# FLUXNET_html <- getURL("http://fluxnet.fluxdata.org/sites/site-list-and-pages/")  ## this doesn't work
+# FLUXNET_table = readHTMLTable(FLUXNET_html)    ## this doesn't work
+# print(FLUXNET_table)
+# #Loading the rvest package
+# library('rvest')
+# url <- 'http://fluxnet.fluxdata.org/sites/site-list-and-pages/'
+# #Reading the HTML code from the website
+# webpage <- read_html(url)
+# #Install SelectorGadget, and Using CSS selectors to scrap the site_ID section
+# siteTable_html <- html_nodes(webpage,'td , a') 
+# siteID_html <- html_nodes(webpage,'tbody td:nth-child(1)')
+# siteID <- html_text(siteID_html)
+# head(siteID) # I am sorry that I don't know how to do it...
+# site_list <- readHTMLTable('Site_list_FLUXNET_2015.html')
+library(plyr)
+flux_table = data.frame(read.csv('flux_site_table.csv'))
+site_list = na.omit((flux_table[,1]))
+country_list = substr(site_list, 1, 2)
+country_list <- country_list[(country_list != "")]
+country = unique(factor(country_list, exclude="NA"));
+country = count(country_list)
+sort_country = country[order(country$freq, decreasing = T),]
+print(sort_country)
 ```
 
 
