@@ -42,8 +42,8 @@ In the previous exercises we loaded data into R using functions like read.csv. H
 
 ```{r}
 gflu = read.csv("http://www.google.org/flutrends/about/data/flu/us/data.txt",skip=11)
-time = as.Date(gflu$Date)
-plot(time,gflu$Boston..MA,type='l')
+time_flu = as.Date(gflu$Date)
+plot(time_flu,gflu$Boston..MA,type='l')
 ```
 
 That said, for publication purposes it is usually important to save the data that you used for an analysis, and that the date of access is recorded (and version number if available), as some datasets are subject to frequent revision.
@@ -73,7 +73,7 @@ tree_count = as.integer(fia_data$TREECOUNT)
 species = as.integer(fia_data$SPCD)
 abund = tapply(tree_count, species, sum, na.rm=TRUE)
 abund_s = sort(abund, decreasing=TRUE)
-print(length(abund_s))
+#print(length(abund_s))
 plot(x=1:length(abund_s), y = log(abund_s), xlab="rank", ylab="log(abundance)")
 ```
 
@@ -96,6 +96,30 @@ recent <- fia_table[which(update > "2018/01/01"),]
 
 **Question 2:**
 Create a sorted table of how many FLUXNET eddy-covariance towers are in each country according to the website at http://fluxnet.fluxdata.org/sites/site-list-and-pages/. Hint: use substring to extract the country code from the overall FLUXNET ID code.
+
+```{r}
+FLUXNET_html <- getURL("http://fluxnet.fluxdata.org/sites/site-list-and-pages/")  ## this doesn't work
+FLUXNET_table = readHTMLTable(FLUXNET_html)    ## this doesn't work
+print(FLUXNET_table)
+#Loading the rvest package
+library('rvest')
+url <- 'http://fluxnet.fluxdata.org/sites/site-list-and-pages/'
+#Reading the HTML code from the website
+webpage <- read_html(url)
+#Install SelectorGadget, and Using CSS selectors to scrap the site_ID section
+siteTable_html <- html_nodes(webpage,'td , a') 
+siteTable_html
+siteTable_html[26]
+siteID_html <- html_nodes(webpage,'tbody td:nth-child(1)')
+siteID_html
+siteID <- html_text(siteID_html)
+siteID
+head(siteID) # I am sorry that I don't know how to do it...
+
+site_list <- readHTMLTable('Site_list_FLUXNET_2015.html')
+site_list
+```
+
 
 grep, system, RegExp
 --------------------
@@ -155,7 +179,10 @@ gsub("RI","VT",myCode[x])  ## substitute ALL: VT for RI
 
 
 **Question 3:** Within the object myCode, find all the lines that begin with the comment character, #.
-
+```{r}
+comment_ch = grep("^#",myCode)    ## returns the line numbers that include the string 'RI'
+print(comment_ch) # note that we are reading the original Exercise_03_BigDat.Rmd file, not this file
+```
 
 netCDF, wget
 ------------
@@ -163,22 +190,20 @@ netCDF, wget
 In this section I want to introduce another command-line utility, wget, which can be used to pull files and content off the web, and to demonstrate how netCDF can be used in R. For this example we will be using data from the WLEF eddy-covariance tower located in northern Wisconsin. Unlike most flux towers, WLEF is a "tall-tower" -- it's actually a 440m TV antenna -- which means that it integrates over a much larger footprint than most towers. Indeed, the tower is instrumented at multiple heights. First, let's use wget to grab the data off the web. A few notes: 1) wget could be used from command line rather than as a system command;  2) if you don't have wget installed, use your web browser
 
 ```{r}
-#system("wget http://flux.aos.wisc.edu/data/cheas/wlef/netcdf/US-PFa-WLEF-TallTowerClea#n-2012-L0-vFeb2013.nc")
-# I could not make this line working, so I manually donwloaded the netCDF data.
+system("wget http://flux.aos.wisc.edu/data/cheas/wlef/netcdf/US-PFa-WLEF-TallTowerClean-2012-L0-vFeb2013.nc")
 ```
 
 Next, lets open the file and look at what it contains
 ```{r}
 ## open the netCDF file
 wlef = nc_open("US-PFa-WLEF-TallTowerClean-2012-L0-vFeb2013.nc")
-print(wlef)    ## metadata
+#print(wlef)    ## metadata
 ```
 
 To start, lets look at the CO2 flux data, NEE_co2, which we see is stored in a matrix that has dimensions of [level2,time], where here level2 refers to the different measurements heights. If we want to grab this data and the vectors describing the dimensions we can do this as:
 
 ```{r}
 NEE = ncvar_get(wlef,"NEE_co2")    ## NEE data
-
 ## matrix dimensions
 height = ncvar_get(wlef,"M_lvl")  
 doy = ncvar_get(wlef,"time")  # day of year
@@ -211,8 +236,22 @@ nc_close(wlef)
 **Question 4:** 
 
 Similar to how we can point read.csv to the URL of a text file, you can open and manipulate netCDF files on remote servers if those servers support THREDDS/OpenDAP. Furthermore, these utilities let you grab just the part of the file that you need rather than the file in it's entirety. Using this approach, download and plot the air temperature data for Boston for 2004 that's located on the ORNL DAAC server `http://thredds.daac.ornl.gov/thredds/dodsC/ornldaac/1220/mstmip_driver_global_hd_climate_tair_2004_v1.nc4`.  The underlying file is quite large so make sure to grab just the subset you need. To do so you'll need to first grab the lat, lon, and time variables to find _which_ grid cell to grab for lat and lon and how many values to grab from time (i.e. _length_). 
-
-
+```{r}
+url_climate_tair = "http://thredds.daac.ornl.gov/thredds/dodsC/ornldaac/1220/mstmip_driver_global_hd_climate_tair_2004_v1.nc4"
+climate_tair = nc_open(url_climate_tair)
+climate_tair_lat = ncvar_get(climate_tair,"lat")    ## climate data
+climate_tair_lon = ncvar_get(climate_tair,"lon")    ## climate data
+climate_tair_time = ncvar_get(climate_tair,"time")    ## climate data
+lat_bs = 42.3601
+lon_bs = -71.0589
+lat_bs = which.min(abs(climate_tair_lat-lat_bs))
+lon_bs = which.min(abs(climate_tair_lon-lon_bs))
+start_time = as.numeric(as.Date("2004-01-01") - as.Date("1700-01-01"))
+end_time = as.numeric(as.Date("2004-12-31") - as.Date("1700-01-01"))
+time_2004 = which(climate_tair_time<end_time & climate_tair_time>start_time)
+temp_air = ncvar_get(climate_tair, 'tair', c(lon_bs, lat_bs, 1), c(1, 1, length(time_2004)))
+plot(as.Date(climate_tair_time[time_2004], origin="1700-01-01"), temp_air, xlab = "Dates", ylab = "air temperature (K)", main = "air temperature of Boston in 2004", cex=0.2, type='o')
+```
 Using APIs
 ----------
 
@@ -261,6 +300,24 @@ time = as.Date(names(EVI))
 ```
 
 **Question 5:** Plot EVI versus time and compare to the CO2 flux observations.
+```{r}
+#plot(time, EVI)
+#print(doy)
+doy_EVI = strftime(time, format = "%j")
+#plot(doy_EVI, EVI)
+
+for(i in 1:3){
+ plot(doy,filter(NEE[i,],rep(1/24,24)),type='l',main=paste("Height =",height[i],"m"), xaxt="n", yaxt="n", xlab = "day of year", ylab = "NEE", col=2)
+ axis(side = 2, at=seq(-10, 10, by=1))
+ axis(side = 1, at=seq(0, 400, by=50))
+ par(new=TRUE)
+ plot(doy_EVI, EVI, xaxt="n", yaxt="n", ann=FALSE, ylim=c(0, 1), type='b',col=3, pch=15, lty=2)
+ axis(side = 4, at=seq(0, 1, by=0.1))
+ legend("topleft", legend = c("NEE", "EVI"), col=c(2,3), lty = 1:2)
+}
+
+```
+
 
 cron
 ----
