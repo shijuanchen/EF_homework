@@ -1,7 +1,7 @@
 ---
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 Exercise 3: Tools for big data
 ========================================================
@@ -356,5 +356,28 @@ Imagine you are working with the full FIA database and want to ensure that the d
 
 * Write out the pseudocode/outline for how to keep the files up to date
 * Write out what the cron table would look like to schedule this job (assume the update only needs to be done weekly)
+ 
+Outline: First, read the table of https://apps.fs.usda.gov/fia/datamart/CSV/datamart_csv.html Then, get the file names and the corresponding "Last Created Date" and "Last Modified Date". If the "Last Created Date" is later than the current time, download the file. If the "Last Modified Date" is later than the current time, delete the local file and download the new file from the website. Otherwise, keep the current files as they are. 
 
+pseudocode:
+```
+get fia_url=https://apps.fs.usda.gov/fia/datamart/CSV/datamart_csv.html
+read the table from the fia_url
+get file_name, last_create_date, last_modified_date
+get the current_time from the system
+loop through every file_name on the fia table:
+  if the last_create_date > current_time:
+      download the file from the website
+  else:
+    if the last_modified_date > current_time:
+          delete the old file
+          download the new file from the website
+        else:
+          no action
+```
 
+Assume that I want to get emails of job status updates and the update will start at 18:30 every Sunday evening. The cron table would look like this:
+```
+MAILTO=shijuan@bu.edu
+30 18 * * 7 /home/shijuanchen/EcoForecast/cron_table_FIA.sh
+```
