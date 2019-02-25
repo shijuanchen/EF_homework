@@ -256,6 +256,8 @@ time_2004 = which(climate_tair_time<end_time & climate_tair_time>start_time)
 temp_air = ncvar_get(climate_tair, 'tair', c(lon_bs, lat_bs, 1), c(1, 1, length(time_2004)))
 plot(as.Date(climate_tair_time[time_2004], origin="1700-01-01"), temp_air, xlab = "Dates", ylab = "air temperature (K)", main = "air temperature of Boston in 2004", cex=0.2, type='o')
 ```
+<br />
+
 Using APIs
 ----------
 
@@ -315,13 +317,14 @@ for(i in 1:3){
  axis(side = 2, at=seq(-10, 10, by=1))
  axis(side = 1, at=seq(0, 400, by=50))
  par(new=TRUE)
- plot(doy_EVI, EVI, xaxt="n", yaxt="n", ann=FALSE, ylim=c(0, 1), type='b',col=3, pch=15, lty=2)
+ plot(doy_EVI, EVI, xaxt="n", yaxt="n", ann=FALSE, ylim=c(0, 1), type='b',col=3, pch=15, lty=2, ylab = "EVI")
  axis(side = 4, at=seq(0, 1, by=0.1))
- legend("topleft", legend = c("NEE", "EVI"), col=c(2,3), lty = 1:2)
+ legend("topleft", legend = c("NEE CO2", "EVI"), col=c(2,3), lty = 1:2)
 }
 
 ```
-
+<br />
+The plots above show EVI versus time and NEE versus time. EVI is the highest in the summer and lowest in the winter, whereas NEE CO2 is the lowest in the peak summer. In the peak summer, photosynthesis is at the highest rate. During photosynthesis, CO2 is absorbed by the plant and thus NEE CO2 is negative and has the lowest value. Since the plant has the largest amount of green leaves during the peak summer, EVI is the highest at this period. In non-growing season, NEE CO2 is slightly above zero and EVI is low, because photosynthesis rate is low.
 
 cron
 ----
