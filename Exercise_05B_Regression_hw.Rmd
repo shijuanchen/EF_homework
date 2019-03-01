@@ -221,13 +221,12 @@ summary(var.burn2)
 ```
 plot marginal distributions
 ```{r}
-# library("diversitree")
-# profiles.plot(beta[2], col.line, col.fill, xlim=NULL, ymax=NULL, n.br=50,
-#               opacity=.5, xlab="Parameter estimate",
-#               ylab="Probability density", legend.pos=NULL,
-#               with.bar=TRUE, col.bg=NA, lwd=1, lines.on.top=TRUE)
-#library("latticeExtra")
-#marginal.plot(beta[1])
+beta1 = var.mat[,c("beta[1]")]
+hist(beta1, breaks = 100)
+beta2 = var.mat[,c("beta[2]")]
+hist(beta2, breaks = 100)
+precision = var.mat[,c("prec")]
+hist(precision, breaks = 100)
 ```
 
 
@@ -258,6 +257,8 @@ summary(var.burn2)
 Comparison: For classic linear regression, the estimated intercept is 10.542, and the estimated slope is 1.987. For Bayesian regression model, the estimated intercept is 10.535, and the estimated slope is 1.987.  The standard error is 3.806 of the classical linear regression. Since the precision is 1/variance, so the precision of the classical linear regression is 0.069. The estimated precision of Bayesian regression model is 0.051. Using these two different approaches, the estimates are very similiar, but Bayesian regression model characterize the probability distribution of the estimates and uncertainty better than the classic regression model.
 
 * Compare the fit parameters to the “true” parameters we used to generate the pseudo-data.  How well does the statistical analysis recover the true model?
+
+
 
 # Regression Credible Intervals
 
