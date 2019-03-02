@@ -221,11 +221,12 @@ summary(var.burn2)
 ```
 plot marginal distributions
 ```{r}
-beta1 = var.mat[,c("beta[1]")]
+var.mat2      <- as.matrix(var.burn2)
+beta1 = var.mat2[,c("beta[1]")]
 hist(beta1, breaks = 100)
-beta2 = var.mat[,c("beta[2]")]
+beta2 = var.mat2[,c("beta[2]")]
 hist(beta2, breaks = 100)
-precision = var.mat[,c("prec")]
+precision = var.mat2[,c("prec")]
 hist(precision, breaks = 100)
 ```
 
@@ -238,9 +239,11 @@ var.mat2      <- as.matrix(var.burn2)
 pairs(var.mat2)  ## pairs plot to evaluate parameter correlation
 ```
 ```{r}
-cor(var.mat2)    ## correlation matrix among model parameters
+cor_2 = cor(var.mat2)    ## correlation matrix among model parameters
+print(cor_2)
 ```
-In the pairs plot, beta[1] (intercept) and beta[2] (slope) have a strong negative correlation, -0.887. The correlation between beta[1] (intercept) and precision is about -0.0102, which is a very weak negative correlation. The correlation between beta[2] (slope) and precision is about 0.0126, which is a very weak positive correlation. In summary, the intercept and slope are negatively correlated, but both of them are amost independent with precision.
+
+In the pairs plot, beta[1] (intercept) and beta[2] (slope) have a strong negative correlation, `r cor_2[1,2]`. The correlation between beta[1] (intercept) and precision is `r cor_2[1,3]`, which is a very weak negative correlation. The correlation between beta[2] (slope) and precision is `r cor_2[2,3]`, which is a very weak positive correlation. In summary, the intercept and slope are negatively correlated, but both of them are amost independent with precision.
 
 * Compare the summary statistics for the Bayesian regression model to those from the classical regression:  summary(lm( y ~ x1 )).  This should include a comparison of the means and uncertainties of **all 3 model parameters**
 
@@ -248,17 +251,19 @@ Build the classical linear regression model:
 ```{r}
 linearModel <- lm(y ~ x1)
 summary(linearModel)  # model summary
+linear_coef <- summary(linearModel)$coefficients
+linear_st <- summary(linearModel)$sigma
 ```
 The summary statistics for the Bayesian regression model is 
 ```{r}
 summary(var.burn2)
 ```
 
-Comparison: For classic linear regression, the estimated intercept is 10.542, and the estimated slope is 1.987. For Bayesian regression model, the estimated intercept is 10.535, and the estimated slope is 1.987.  The standard error is 3.806 of the classical linear regression. Since the precision is 1/variance, so the precision of the classical linear regression is 0.069. The estimated precision of Bayesian regression model is 0.051. Using these two different approaches, the estimates are very similiar, but Bayesian regression model characterize the probability distribution of the estimates and uncertainty better than the classic regression model.
+Comparison: For classic linear regression, the estimated intercept is `r linear_coef[1,1]`, and the estimated slope is `r linear_coef[2, 1]`. For Bayesian regression model, the estimated intercept is `r mean(var.mat2[,c("beta[1]")])`, and the estimated slope is `r mean(var.mat2[,c("beta[2]")])`.  The standard error is `r linear_st` of the classical linear regression. Since the precision is 1/variance, so the precision of the classical linear regression is `r 1.0/(linear_st*linear_st)`. The estimated precision of Bayesian regression model is `r mean(var.mat2[,c("prec")])`. Using these two different approaches, the estimates are very similiar, but Bayesian regression model characterize the probability distribution of the estimates and uncertainty better than the classic regression model.
 
 * Compare the fit parameters to the “true” parameters we used to generate the pseudo-data.  How well does the statistical analysis recover the true model?
 
-
+The fit parameters are close to the "true" parameters we used to generate the pseudo-data. The statistical analysis recovers the true model well in some degree, though it could be improved if we have more data.
 
 # Regression Credible Intervals
 
