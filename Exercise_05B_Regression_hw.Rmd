@@ -168,9 +168,6 @@ cor(var.mat)    ## correlation matrix among model parameters
 
 ### Task 1
 * Evaluate the MCMC chain for convergence. Include relevant diagnostics and plots. Determine and remove burnin e.g. ```var.burn <- window(var.out,start=burnin)```
-```{r}
-plot(var.out)
-```
 
 ```{r}
 gelman.diag(var.out)
@@ -203,7 +200,7 @@ gelman.diag(var.out2)
 GBR <- gelman.plot(var.out2)
 ```
 ```{r}
-burnin2 = 5000 # determine the burn in as 4000 steps.
+burnin2 = 3000 # determine the burn in steps.
 var.burn2 <- window(var.out2,start=burnin2) # remove burnin
 plot(var.burn2)  # ## check diagnostics post burn-in
 ```
@@ -221,20 +218,26 @@ summary(var.burn2)
 ```
 plot marginal distributions
 ```{r}
+## convert to matrix
 var.mat2      <- as.matrix(var.burn2)
-beta1 = var.mat2[,c("beta[1]")]
-hist(beta1, breaks = 100)
-beta2 = var.mat2[,c("beta[2]")]
-hist(beta2, breaks = 100)
-precision = var.mat2[,c("prec")]
-hist(precision, breaks = 100)
+plot_hist_function_1 <- function(beta, bx){
+  beta_x = var.mat2[,c(beta)]
+  hist(beta_x, breaks = 100, main=beta,xlab=beta)
+  abline(v=bx, col=2, lwd=3)
+  abline(v=quantile(beta_x, c(0.25, 0.50, 0.75)), lty="dotted", col=3, lwd=3)
+}
+
+plot_hist_function_1("beta[1]", b0)
+plot_hist_function_1("beta[2]", b1)
+plot_hist_function_1("prec", 1/(sigma*sigma))
+
 ```
 
+The green dotted lines indicate 0.25, 0.50, 0.75 percentiles. The red line indicate the "true" parameters.
 
 * Describe and explain the parameter covariances that you observe in the pairs plot and parameter correlation matrix.
 ```{r}
-## convert to matrix
-var.mat2      <- as.matrix(var.burn2)
+
 ## Pairwise scatter plots & correlation
 pairs(var.mat2)  ## pairs plot to evaluate parameter correlation
 ```
@@ -344,8 +347,85 @@ Extend your univariate regression model to a multivariate regression.
 ###  Task 2
 
 * Show the JAGS and R code used.
+```{r}
+
+data2 <- list(x1=x1, x2=x2, y=y, n=n)
+
+multivariate_regression <- "
+model{
+  beta ~ dmnorm(b0, Vb)  # prior on vector of regression params
+  prec ~ dgamma(s1,s2)
+  for(i in 1:n){
+      mu[i] <- beta[1] + beta[2]*x1[i] + beta[3]*x2[i] + beta[4]*x1[i]*x2[i]  ## process model
+      y[i]  ~ dnorm(mu[i],prec)             ## data model
+  }
+}
+"
+## specify priors
+data2$b0 <- as.vector(c(0,0,0,0)) ## regression beta means
+data2$Vb <- solve(diag(10000,4))   ## regression beta precisions
+data2$s1 <- 0.1                    ## error prior n/2
+data2$s2 <- 0.1                    ## error prior SS/2
+
+## initial conditions
+nchain = 3
+inits2 <- list()
+for(i in 1:nchain){
+ inits2[[i]] <- list(beta = rnorm(4,0,5), prec = runif(1,1/100,1/20))
+}
+
+j.model_mv   <- jags.model(file = textConnection(multivariate_regression),
+                             data = data2,
+                             inits = inits2,
+                             n.chains = nchain)
+
+```
 * Include relevant convergence diagnostics and plots. 
+```{r}
+var.out_mv   <- coda.samples (model = j.model_mv,
+                            variable.names = c("beta","prec"),
+                                n.iter = 5000)
+## assess convergence and remove burn-in before doing other diagnostics
+GBR <- gelman.plot(var.out_mv)
+gelman.diag(var.out_mv)
+```
+```{r}
+burnin = 1000 # determine the burn in as 1000 steps.
+var.burn_mv <- window(var.out_mv,start=burnin) # remove burnin
+plot(var.burn_mv)  # ## check diagnostics post burn-in
+```
+```{r}
+effectiveSize(var.burn_mv)
+```
+Effective sample size is larger than 5000. Good.
+
 * Report parameter summary table. 
+```{r}
+summary(var.burn_mv)
+```
 * Plot marginal and pairwise joint distributions. Indicate 'true' parameters on the plots
+```{r}
+var.mat_mv      <- as.matrix(var.out_mv)
+pairs(var.mat_mv)  ## pairs plot to evaluate parameter correlation
+```
+```{r}
+cor(var.mat_mv)
+```
+```{r}
+plot_hist_function <- function(beta, bx){
+  beta_x = var.mat_mv[,c(beta)]
+  hist(beta_x, breaks = 100, main=beta,xlab=beta)
+  abline(v=bx, col=2, lwd=3)
+  abline(v=quantile(beta_x, c(0.25, 0.50, 0.75)), lty="dotted", col=3, lwd=3)
+}
+plot_hist_function("beta[1]", b0)
+plot_hist_function("beta[2]", b1)
+plot_hist_function("beta[3]", b2)
+plot_hist_function("beta[4]", b3)
+plot_hist_function("prec", 1/(sigma*sigma))
+```
+
+The green dotted lines show the 0.25, 0.50, 0.75 percentiles of estimates, the red solid line show the "true" parameters.
+
 * Compare the fit parameters to the “true” parameters we used to generate the pseudo-data.  How well does the statistical analysis recover the true model?
 
