@@ -183,7 +183,9 @@ plot(var.burn)  # ## check diagnostics post burn-in
 ```{r}
 acfplot(var.burn)
 ```
-autocorrelation is very low, which is good.
+
+The autocorrelation is very low, which is good.
+
 ```{r}
 effectiveSize(var.burn)
 ```
@@ -210,6 +212,7 @@ effectiveSize(var.burn2)
 ```{r}
 acfplot(var.burn2)
 ```
+
 Now, we have enough sample size and the autocorrelation is very low.
 
 * Report parameter summary table and plot marginal distributions
@@ -224,7 +227,7 @@ plot_hist_function_1 <- function(beta, bx){
   beta_x = var.mat2[,c(beta)]
   hist(beta_x, breaks = 100, main=beta,xlab=beta)
   abline(v=bx, col=2, lwd=3)
-  abline(v=quantile(beta_x, c(0.25, 0.50, 0.75)), lty="dotted", col=3, lwd=3)
+  abline(v=quantile(beta_x, c(0.025, 0.25, 0.50, 0.75, 0.975)), lty="dotted", col=3, lwd=3)
 }
 
 plot_hist_function_1("beta[1]", b0)
@@ -233,7 +236,7 @@ plot_hist_function_1("prec", 1/(sigma*sigma))
 
 ```
 
-The green dotted lines indicate 0.25, 0.50, 0.75 percentiles. The red line indicate the "true" parameters.
+The green dotted lines indicate 2.5%, 25%, 50%, 75%, 97.5% quantiles of the estimates. The red line indicate the "true" parameters.
 
 * Describe and explain the parameter covariances that you observe in the pairs plot and parameter correlation matrix.
 ```{r}
@@ -246,7 +249,7 @@ cor_2 = cor(var.mat2)    ## correlation matrix among model parameters
 print(cor_2)
 ```
 
-In the pairs plot, beta[1] (intercept) and beta[2] (slope) have a strong negative correlation, `r cor_2[1,2]`. The correlation between beta[1] (intercept) and precision is `r cor_2[1,3]`, which is a very weak negative correlation. The correlation between beta[2] (slope) and precision is `r cor_2[2,3]`, which is a very weak positive correlation. In summary, the intercept and slope are negatively correlated, but both of them are amost independent with precision.
+In the pairs plot, beta[1] (intercept) and beta[2] (slope) have a strong negative correlation, `r cor_2[1,2]`. The correlation between beta[1] (intercept) and precision is `r cor_2[1,3]`, which is a very weak correlation. The correlation between beta[2] (slope) and precision is `r cor_2[2,3]`, which is a very weak correlation. In summary, the intercept and slope are negatively correlated, but both of them are amost independent with precision.
 
 * Compare the summary statistics for the Bayesian regression model to those from the classical regression:  summary(lm( y ~ x1 )).  This should include a comparison of the means and uncertainties of **all 3 model parameters**
 
@@ -266,7 +269,8 @@ Comparison: For classic linear regression, the estimated intercept is `r linear_
 
 * Compare the fit parameters to the “true” parameters we used to generate the pseudo-data.  How well does the statistical analysis recover the true model?
 
-The fit parameters are close to the "true" parameters we used to generate the pseudo-data. The statistical analysis recovers the true model well in some degree, though it could be improved if we have more data.
+Based on the histograms for the estimated model parameters, the "true" parameter always fall into (2.5%, 97.5%) quantiles of the estimates of the model parameters. Also, the uncertainty of the model can be well evaluated by calculating the credible interval around the regression line. Therefore, the the statistical analysis recovers the true model well.
+
 
 # Regression Credible Intervals
 
@@ -416,7 +420,7 @@ plot_hist_function <- function(beta, bx){
   beta_x = var.mat_mv[,c(beta)]
   hist(beta_x, breaks = 100, main=beta,xlab=beta)
   abline(v=bx, col=2, lwd=3)
-  abline(v=quantile(beta_x, c(0.25, 0.50, 0.75)), lty="dotted", col=3, lwd=3)
+  abline(v=quantile(beta_x, c(0.025, 0.25, 0.50, 0.75, 0.975)), lty="dotted", col=3, lwd=3)
 }
 plot_hist_function("beta[1]", b0)
 plot_hist_function("beta[2]", b1)
@@ -425,7 +429,31 @@ plot_hist_function("beta[4]", b3)
 plot_hist_function("prec", 1/(sigma*sigma))
 ```
 
-The green dotted lines show the 0.25, 0.50, 0.75 percentiles of estimates, the red solid line show the "true" parameters.
+The green dotted lines indicate 2.5%, 25%, 50%, 75%, 97.5% quantiles of the estimates. The red line indicate the "true" parameters.
 
 * Compare the fit parameters to the “true” parameters we used to generate the pseudo-data.  How well does the statistical analysis recover the true model?
 
+The "true" parameters always fall into (2.5%, 97.5%) quantiles of the estimates. The statistical analysis recover the true model well. The model uncertainty can also be evalutated using credible and prediction intervals (I don't know how to plot it exactly). 
+```{r}
+# ## credible and prediction intervals
+# nsamp <- 5000
+# samp <- sample.int(nrow(var.mat_mv),nsamp)
+# xpred <- 0:20                   ## sequence of x values we're going to
+# npred <- length(xpred)              ##      make predictions for
+# ypred <- matrix(0.0,nrow=nsamp,ncol=npred)  ## storage for predictive interval
+# ycred <- matrix(0.0,nrow=nsamp,ncol=npred)  ## storage for credible interval
+# for(g in seq_len(nsamp)){
+#   theta = var.mat_mv[samp[g],]
+#   ycred[g,] <- theta["beta[1]"] + theta["beta[2]"]*xpred + theta["beta[2]"]*7.5 + theta["beta[3]"]*xpred*7.5
+#   ypred[g,] <- rnorm(npred,ycred[g,],1/sqrt(theta["prec"]))
+# }
+# ci <- apply(ycred,2,quantile,c(0.025,0.5,0.975))  ## credible interval and median
+# pi <- apply(ypred,2,quantile,c(0.025,0.975))        ## prediction interval
+
+# plot(x1,y,cex=0.5,xlim=c(0,20),ylim=c(0,50))
+# lines(xpred,ci[1,],col=3,lty=2) ## lower CI
+# lines(xpred,ci[2,],col=3,lwd=3) ## median
+# lines(xpred,ci[3,],col=3,lty=2) ## upper CI
+# lines(xpred,pi[1,],col=4,lty=2) ## lower PI
+# lines(xpred,pi[2,],col=4,lty=2) ## upper PI
+```
