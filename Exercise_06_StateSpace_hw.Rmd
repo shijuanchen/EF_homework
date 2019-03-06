@@ -124,6 +124,37 @@ Assignment:
 To look at how observation frequency affects data assimilation, convert 3 out of every 4 observations to NA (i.e. treat the data as approximately monthly) and refit the model. 
 
 * Generate a time-series plot for the CI of x that includes the observations (as above). Use a different color and symbol to differentiate observations that were included in the model versus those that were converted to NA's.
+```{r}
+# gflu = read.csv("http://www.google.org/flutrends/about/data/flu/us/data.txt",skip=11)
+# time = as.Date(gflu$Date)
+# y = gflu$Massachusetts
+# plot(time,y,type='l',ylab="Flu Index",lwd=1,log='y')
+# points(time,y,pch="+",cex=0.5, col=2)
+```
+```{r}
+# 
+gflu = read.csv("http://www.google.org/flutrends/about/data/flu/us/data.txt",skip=11)
+time = as.Date(gflu$Date)
+y = gflu$Massachusetts
+time_m = vector()
+y_m = vector()
+for(i in 1:length(time)){
+  if( i%%4==0 ){
+    time_m[i] = time[i]
+    y_m[i] = y[i]
+  }
+}
+time_m = as.Date(time_m,origin='1970-01-01')
+# print(time[1:30])
+# print(y[1:30])
+# print(time_m[1:30])
+# print(y_m[1:30])
+# plot(time_m,y_m,type='l',ylab="Flu Index",lwd=1,log='y')
+# points(time_m,y_m,pch="+",cex=0.5, col=2)
+```
+
+
+
 * Compare the CI between the two runs.
 * Generate a predicted (median) vs observed plot for the data points that were removed
 * Comment on the accuracy and precision of the state estimates.
