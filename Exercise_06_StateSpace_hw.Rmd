@@ -124,13 +124,7 @@ Assignment:
 To look at how observation frequency affects data assimilation, convert 3 out of every 4 observations to NA (i.e. treat the data as approximately monthly) and refit the model. 
 
 * Generate a time-series plot for the CI of x that includes the observations (as above). Use a different color and symbol to differentiate observations that were included in the model versus those that were converted to NA's.
-```{r}
-# gflu = read.csv("http://www.google.org/flutrends/about/data/flu/us/data.txt",skip=11)
-# time = as.Date(gflu$Date)
-# y = gflu$Massachusetts
-# plot(time,y,type='l',ylab="Flu Index",lwd=1,log='y')
-# points(time,y,pch="+",cex=0.5, col=2)
-```
+
 ```{r}
 # 
 gflu = read.csv("http://www.google.org/flutrends/about/data/flu/us/data.txt",skip=11)
@@ -145,25 +139,126 @@ for(i in 1:length(time)){
   }
 }
 time_m = as.Date(time_m,origin='1970-01-01')
-# print(time[1:30])
-# print(y[1:30])
-# print(time_m[1:30])
-# print(y_m[1:30])
-# plot(time_m,y_m,type='l',ylab="Flu Index",lwd=1,log='y')
-# points(time_m,y_m,pch="+",cex=0.5, col=2)
+
+```
+
+```{r}
+RandomWalk = "
+model{
+  
+  #### Data Model
+  for(t in 1:n){
+    y[t] ~ dnorm(x[t],tau_obs)
+  }
+  
+  #### Process Model
+  for(t in 2:n){
+    x[t]~dnorm(x[t-1],tau_add)
+  }
+  
+  #### Priors
+  x[1] ~ dnorm(x_ic,tau_ic)
+  tau_obs ~ dgamma(a_obs,r_obs)
+  tau_add ~ dgamma(a_add,r_add)
+}
+"
+
+data_m <- list(y=log(y_m),n=length(y_m),x_ic=log(1000),tau_ic=100,a_obs=1,r_obs=1,a_add=1,r_add=1)
+nchain = 3
+init_m <- list()
+for(i in 1:nchain){
+  y.samp = sample(y_m,length(y_m),replace=TRUE)
+  init_m[[i]] <- list(tau_add=1/var(diff(log(y.samp))),tau_obs=5/var(log(y.samp)))
+}
+j.model_m   <- jags.model (file = textConnection(RandomWalk),
+                             data = data_m,
+                             inits = init_m,
+                             n.chains = 3)
+```
+
+```{r}
+## burn-in
+jags.out_m   <- coda.samples (model = j.model_m,
+                            variable.names = c("tau_add","tau_obs"),
+                                n.iter = 4000)
+#plot(jags.out_m)
+gelman.diag(jags.out_m)
+GBR <- gelman.plot(jags.out_m)
+```
+```{r}
+burnin_m = 1000 # determine burnin as 1000
+var.burn_m <- window(jags.out_m,start=burnin_m) # remove burnin
+effectiveSize(var.burn_m) # need to increase
+jags.out2 <- coda.samples(j.model_m,variable.names = c("tau_add","tau_obs"),30000)
+effectiveSize(jags.out2) 
+```
+```{r}
+plot(jags.out2)
+```
+
+```{r}
+summary(jags.out2)
+```
+
+```{r}
+jags.out2 <- coda.samples(j.model_m,variable.names = c("x", "tau_add","tau_obs"),30000)
+```
+
+```{r}
+time.rng = c(1,length(time_m)) ## adjust to zoom in and out
+out2 <- as.matrix(jags.out2)
+x.cols2 <- grep("^x",colnames(out2)) ## grab all columns that start with the letter x
+ci2 <- apply(exp(out2[,x.cols2]),2,quantile,c(0.025,0.5,0.975)) ## model was fit on log scale
+
+plot(time,ci[2,],type='n',ylim=range(y_m,na.rm=TRUE),ylab="Flu Index",log='y',xlim=time[time.rng])
+## adjust x-axis label to be monthly if zoomed
+
+if(diff(time.rng) < 100){
+  axis.Date(1, at=seq(time_m[time.rng[1]],time_m[time.rng[2]],by='month'), format = "%Y-%m")
+}
+ecoforecastR::ciEnvelope(time,ci2[1,],ci2[3,],col=ecoforecastR::col.alpha("lightBlue",0.75))
+points(time_m,y_m,pch="+",cex=0.5)
 ```
 
 
-
 * Compare the CI between the two runs.
+
+Comparison of the CI between the two runs: ...
+
 * Generate a predicted (median) vs observed plot for the data points that were removed
+
+```{r}
+ci_rm <- vector()
+y_rm <- vector()
+for(i in 1:length(time)){
+  if( i%%4!=0 ){
+    ci_rm[i] = ci2[2,i]
+    y_rm[i] = y[i]
+  }
+}
+
+plot(ci_rm, y_rm, xlim=range(0, 7000), ylim=range(0, 7000), xlab='predicted value', ylab='observed value', cex=0.5)
+```
+
 * Comment on the accuracy and precision of the state estimates.
+...
+
 * How does the reduction in data volume affect the parameter estimates (taus)
+...
 
 Extra Credit (Part 1):
 ----------------------
 
 Return to the original data and instead of removing 3/4 of the data remove the last 40 observations (convert to NA) and refit the model to make a forecast for this period
+
+```{r}
+gflu = read.csv("http://www.google.org/flutrends/about/data/flu/us/data.txt",skip=11)
+time = as.Date(gflu$Date)
+y = gflu$Massachusetts
+time_40 = time[1:length(time)-40]
+y_40 = y[1:length(time)-40]
+
+```
 
 * Generate a time-series plot for the CI of x that includes the observations (as above but zoom the plot on the last ~80 observations). Use a different color and symbol to differentiate observations that were included in the model versus those that were converted to NA's.
 * Comment on how well the random walk model performed (both accuracy and precision) and how it might be modified to improve both these criteria.
@@ -232,6 +327,11 @@ Assignment:
 -----------
 
 * Compare the process and observation error estimates and model CI between this fit and the original random walk model. How much has the residual variance been reduced by?
+
+```{r}
+
+```
+
 * Because a state-space model returns X's that are close to the Y's, metrics such as R2 and RMSE aren't great metrics of model performance. Besides looking at the taus, how else could we judge which model is doing better (in a way that avoids/penalizes overfitting)?
 * Explain and discuss the parameter estimates (betas) from the linear model (what do they mean both biologically and in terms of the predictability of the system) and their correlations
 
