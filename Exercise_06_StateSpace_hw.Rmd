@@ -349,16 +349,16 @@ for(t in (length(time)-39-1):length(time)){
    y_40[t] <- rnorm(1, y_40[t-1], tau_add)
 }
 
-time.rng = c(length(time)-80,length(time)) ## adjust to zoom in and out
+time.rng_40 = c(length(time)-80,length(time)) ## adjust to zoom in and out
 
 x.cols_40 <- grep("^x",colnames(out_40)) ## grab all columns that start with the letter x
 ci_40 <- apply(exp(out_40[,x.cols_40]),2,quantile,c(0.025,0.5,0.975)) ## model was fit on log scale
 
-plot(time,ci_40[2,],type='n',ylim=range(y_40,na.rm=TRUE),ylab="Flu Index",log='y',xlim=time[time.rng])
+plot(time,ci_40[2,],type='n',ylim=range(y_40,na.rm=TRUE),ylab="Flu Index",log='y',xlim=time[time.rng_40])
 ## adjust x-axis label to be monthly if zoomed
 
 if(diff(time.rng) < 100){
-  axis.Date(1, at=seq(time[time.rng[1]],time[time.rng[2]],by='month'), format = "%Y-%m")
+  axis.Date(1, at=seq(time[time.rng_40[1]],time[time.rng_40[2]],by='month'), format = "%Y-%m")
 }
 ecoforecastR::ciEnvelope(time,ci_40[1,],ci_40[3,],col=ecoforecastR::col.alpha("lightBlue",0.75))
 points(time,y_40,pch="+",cex=0.5)
@@ -437,11 +437,55 @@ Assignment:
 * Compare the process and observation error estimates and model CI between this fit and the original random walk model. How much has the residual variance been reduced by?
 
 ```{r}
+jags.out_o   <- coda.samples (model = j.model,
+                            variable.names = c("tau_add","tau_obs"),
+                                n.iter = 10000)
+summary(jags.out_o)
+summary(params)
+```
+
+```{r}
+time.rng = c(1,length(time)) ## adjust to zoom in and out
+out <- as.matrix(jags.out)
+x.cols <- grep("^x",colnames(out)) ## grab all columns that start with the letter x
+ci <- apply(exp(out[,x.cols]),2,quantile,c(0.025,0.5,0.975)) ## model was fit on log scale
+
+plot(time,ci[2,],type='n',ylim=range(y,na.rm=TRUE),ylab="Flu Index",log='y',xlim=time[time.rng])
+## adjust x-axis label to be monthly if zoomed
+if(diff(time.rng) < 100){ 
+  axis.Date(1, at=seq(time[time.rng[1]],time[time.rng[2]],by='month'), format = "%Y-%m")
+}
+ecoforecastR::ciEnvelope(time,ci[1,],ci[3,],col=ecoforecastR::col.alpha("Red",1))
+points(time,y,pch="+",cex=0.5)
+
+## confidence interval
+out_lm <- as.matrix(ef.out$predict)
+ci <- apply(exp(out_lm),2,quantile,c(0.025,0.5,0.975))
+#plot(time,ci[2,],type='n',ylim=range(y,na.rm=TRUE),ylab="Flu Index",log='y',xlim=time[time.rng])
+## adjust x-axis label to be monthly if zoomed
+if(diff(time.rng) < 100){ 
+  axis.Date(1, at=seq(time[time.rng[1]],time[time.rng[2]],by='month'), format = "%Y-%m")
+}
+ecoforecastR::ciEnvelope(time,ci[1,],ci[3,],col=ecoforecastR::col.alpha("lightBlue",1))
+points(time,y,pch="+",cex=0.5)
 
 ```
 
+```{r}
+hist(1/sqrt(out[,1]),main=colnames(out)[1], breaks=400)
+hist(1/sqrt(out[,2]),main=colnames(out)[2], breaks=400)
+```
+```{r}
+hist(1/sqrt(out_lm[,4]),main=colnames(out_lm)[4], breaks=400)
+hist(1/sqrt(out_lm[,5]),main=colnames(out_lm)[5], breaks=400)
+```
+
+
 * Because a state-space model returns X's that are close to the Y's, metrics such as R2 and RMSE aren't great metrics of model performance. Besides looking at the taus, how else could we judge which model is doing better (in a way that avoids/penalizes overfitting)?
+XXXX
+
 * Explain and discuss the parameter estimates (betas) from the linear model (what do they mean both biologically and in terms of the predictability of the system) and their correlations
+XXXX
 
 Extra Credit (Part 2):
 ----------------------
@@ -449,4 +493,6 @@ Extra Credit (Part 2):
 Repeat the process of forecasting the last 40 observations (convert to NA), this time using the DLM with temperature as a covariate
 
 * Generate a time-series plot for the CI that includes the observations and both the random walk and DLM models (Hint, think about the order you plot in so you can see both models, also consider including transpancy [alpha] in the CI color)
+
+
 * Comment on how well the DLM model performed (both accuracy and precision) relative to the random walk and the true observations. How could the model be further improved?
