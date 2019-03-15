@@ -238,6 +238,7 @@ for(i in 1:length(time)){
 }
 
 plot(ci_rm, y_rm, xlim=range(0, 7000), ylim=range(0, 7000), xlab='predicted value', ylab='observed value', cex=0.5)
+lines(ci_rm, ci_rm, col=2)
 ```
 
 * Comment on the accuracy and precision of the state estimates.
@@ -255,13 +256,120 @@ Return to the original data and instead of removing 3/4 of the data remove the l
 gflu = read.csv("http://www.google.org/flutrends/about/data/flu/us/data.txt",skip=11)
 time = as.Date(gflu$Date)
 y = gflu$Massachusetts
-time_40 = time[1:length(time)-40]
-y_40 = y[1:length(time)-40]
+time_40 = time
+y_40 = y
+time_40[(length(time)-39): length(time)] = NA
+y_40[(length(time)-39): length(time)] = NA
+```
+```{r}
+RandomWalk = "
+model{
+  
+  #### Data Model
+  for(t in 1:n){
+    y[t] ~ dnorm(x[t],tau_obs)
+  }
+  
+  #### Process Model
+  for(t in 2:n){
+    x[t]~dnorm(x[t-1],tau_add)
+  }
+  
+  #### Priors
+  x[1] ~ dnorm(x_ic,tau_ic)
+  tau_obs ~ dgamma(a_obs,r_obs)
+  tau_add ~ dgamma(a_add,r_add)
+}
+"
 
+data_40 <- list(y=log(y_40),n=length(y_40),x_ic=log(1000),tau_ic=100,a_obs=1,r_obs=1,a_add=1,r_add=1)
+nchain = 3
+init_40 <- list()
+for(i in 1:nchain){
+  y.samp = sample(y_40,length(y_40),replace=TRUE)
+  init_40[[i]] <- list(tau_add=1/var(diff(log(y.samp))),tau_obs=5/var(log(y.samp)))
+}
+j.model_40   <- jags.model (file = textConnection(RandomWalk),
+                             data = data_40,
+                             inits = init_40,
+                             n.chains = 3)
+```
+
+```{r}
+## burn-in
+jags.out_40   <- coda.samples (model = j.model_40,
+                            variable.names = c("tau_add","tau_obs"),
+                                n.iter = 2000)
+#plot(jags.out_m)
+gelman.diag(jags.out_40)
+```
+
+```{r}
+GBR <- gelman.plot(jags.out_40)
+```
+
+```{r}
+burnin_40 = 1000 # determine burnin as 1000
+var.burn_40 <- window(jags.out_40,start=burnin_40) # remove burnin
+effectiveSize(var.burn_40) # need to increase
+```
+
+```{r}
+jags.out_40 <- coda.samples(j.model_40,variable.names = c("tau_add","tau_obs"),10000)
+effectiveSize(jags.out_40) 
+```
+```{r}
+plot(jags.out_40)
+```
+
+```{r}
+summary(jags.out_40)
+```
+
+```{r}
+jags.out_40 <- coda.samples(j.model_40,variable.names = c("x", "tau_add","tau_obs"),10000)
 ```
 
 * Generate a time-series plot for the CI of x that includes the observations (as above but zoom the plot on the last ~80 observations). Use a different color and symbol to differentiate observations that were included in the model versus those that were converted to NA's.
+
+```{r}
+gflu = read.csv("http://www.google.org/flutrends/about/data/flu/us/data.txt",skip=11)
+time = as.Date(gflu$Date)
+y = gflu$Massachusetts
+time_40 = time
+y_40 = y
+time_40[(length(time)-39): length(time)] = NA
+y_40[(length(time)-39): length(time)] = NA
+
+out_40 <- as.matrix(jags.out_40)
+tau_add = out_40[,1]
+tau_obs = out_40[,2]
+
+for(t in (length(time)-39-1):length(time)){
+   y_40[t] <- rnorm(1, y_40[t-1], tau_add)
+}
+
+time.rng = c(length(time)-80,length(time)) ## adjust to zoom in and out
+
+x.cols_40 <- grep("^x",colnames(out_40)) ## grab all columns that start with the letter x
+ci_40 <- apply(exp(out_40[,x.cols_40]),2,quantile,c(0.025,0.5,0.975)) ## model was fit on log scale
+
+plot(time,ci_40[2,],type='n',ylim=range(y_40,na.rm=TRUE),ylab="Flu Index",log='y',xlim=time[time.rng])
+## adjust x-axis label to be monthly if zoomed
+
+if(diff(time.rng) < 100){
+  axis.Date(1, at=seq(time[time.rng[1]],time[time.rng[2]],by='month'), format = "%Y-%m")
+}
+ecoforecastR::ciEnvelope(time,ci_40[1,],ci_40[3,],col=ecoforecastR::col.alpha("lightBlue",0.75))
+points(time,y_40,pch="+",cex=0.5)
+points(time[(length(time)-39): length(time)],y[(length(time)-39): length(time)],pch="+",cex=0.5, col=2)
+
+```
+
+
 * Comment on how well the random walk model performed (both accuracy and precision) and how it might be modified to improve both these criteria.
+
+XXXX
 
 # Dynamic Linear Models
 
