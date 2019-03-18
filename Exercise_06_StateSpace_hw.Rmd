@@ -223,7 +223,7 @@ points(time_m,y_m,pch="+",cex=0.5)
 
 * Compare the CI between the two runs.
 
-Comparison of the CI between the two runs: ...
+The CI of the first run is smaller than the second run, because the first run has more observations, so that the uncertainty is lower.
 
 * Generate a predicted (median) vs observed plot for the data points that were removed
 
@@ -242,10 +242,23 @@ lines(ci_rm, ci_rm, col=2)
 ```
 
 * Comment on the accuracy and precision of the state estimates.
-...
+
+When the estimates are smaller than 1500, both the accuracy and precision of the estimates are good. When the estimates is larger than 1500, the accuracy and precision of the estimates are low.
 
 * How does the reduction in data volume affect the parameter estimates (taus)
-...
+
+Both tau_add and tau_obs are smaller in the second run than in the first run. The tau_add and tau_obs decrease when the data volume decrease, since the larger the data volume is, the lower the uncertainty is.
+
+```{r}
+#summary(jags.out$tau_add)
+#Mean      SD  Naive SE Time-series SE
+#tau_add 23.268 1.61821 0.0093427      0.0132413
+#tau_obs 62.281 5.82820 0.0336492      0.0703662
+#summary(jags.out2)
+#Mean    SD Naive SE Time-series SE
+## tau_add 13.37 1.837 0.006125        0.02324
+## tau_obs 12.81 2.668 0.008894        0.02931
+```
 
 Extra Credit (Part 1):
 ----------------------
@@ -369,7 +382,7 @@ points(time[(length(time)-39): length(time)],y[(length(time)-39): length(time)],
 
 * Comment on how well the random walk model performed (both accuracy and precision) and how it might be modified to improve both these criteria.
 
-XXXX
+The random walk model has a bad performance both in terms of the accuracy and precision. The model should include more variables in order to improve its performance.
 
 # Dynamic Linear Models
 
@@ -461,6 +474,7 @@ points(time,y,pch="+",cex=0.5)
 ## confidence interval
 out_lm <- as.matrix(ef.out$predict)
 ci <- apply(exp(out_lm),2,quantile,c(0.025,0.5,0.975))
+
 #plot(time,ci[2,],type='n',ylim=range(y,na.rm=TRUE),ylab="Flu Index",log='y',xlim=time[time.rng])
 ## adjust x-axis label to be monthly if zoomed
 if(diff(time.rng) < 100){ 
@@ -470,29 +484,106 @@ ecoforecastR::ciEnvelope(time,ci[1,],ci[3,],col=ecoforecastR::col.alpha("lightBl
 points(time,y,pch="+",cex=0.5)
 
 ```
-
 ```{r}
-hist(1/sqrt(out[,1]),main=colnames(out)[1], breaks=400)
-hist(1/sqrt(out[,2]),main=colnames(out)[2], breaks=400)
-```
-```{r}
-hist(1/sqrt(out_lm[,4]),main=colnames(out_lm)[4], breaks=400)
-hist(1/sqrt(out_lm[,5]),main=colnames(out_lm)[5], breaks=400)
+params_lm <- as.matrix(params)
+tau_add_lm <- mean(params_lm[, 4])
+tau_obs_lm <- mean(params_lm[, 5])
+params_rw <- as.matrix(jags.out_o)
+tau_add_rw <- mean(params_rw[, 1])
+tau_obs_rw <- mean(params_rw[, 2])
+var_tau_add_rw = 1/(tau_add_rw*tau_add_rw)
+var_tau_add_lm = 1/(tau_add_lm*tau_add_lm)
+var_tau_obs_rw = 1/(tau_obs_rw*tau_obs_rw)
+var_tau_obs_lm = 1/(tau_obs_lm*tau_obs_lm)
+dvar_tau_add = var_tau_add_rw - var_tau_add_lm
+dvar_tau_obs = var_tau_obs_rw - var_tau_obs_lm
+pvar_tau_add = (dvar_tau_add/var_tau_add_rw)*100
+pvar_tau_obs = (dvar_tau_obs/var_tau_obs_rw)*100
 ```
 
+The figure above provides a visual comparison between the CI of the random walk model (red) and the linear dynamics model (light blue). The CI of linear dynamics model is always narrower than the random walk model. tau_add and tau_obs are larger in the linear dynamics model than they are in random walk model. The variance of process and observation error estimates of random walk model is tau_add = `r var_tau_add_rw` and tau_obs = `r var_tau_obs_rw`, respectively. The variance of process and observation error estimates of linear dynamic model is tau_add = `r var_tau_add_lm` and tau_obs = `r var_tau_obs_lm`, respectively. The variance of is reduced by `r pvar_tau_add`% and `r pvar_tau_obs`% for process and observation error estimates, respectively. 
 
 * Because a state-space model returns X's that are close to the Y's, metrics such as R2 and RMSE aren't great metrics of model performance. Besides looking at the taus, how else could we judge which model is doing better (in a way that avoids/penalizes overfitting)?
-XXXX
+
+We can judge the performance of the model by looking at the values and distributions of taus. The taus are larger in the linear dynamics model, indicates a better model.
 
 * Explain and discuss the parameter estimates (betas) from the linear model (what do they mean both biologically and in terms of the predictability of the system) and their correlations
-XXXX
+
+betaIntercept and betaTmin have strong negative correlation. betaIntercept and beta_IC have strong negative correlation. betaTmin and beta_IC have strong positive correlation. betaIntercept indicates the initial conditions of influenza.  betaTmin indicates the relationship between flu and minimum temperature. beta_IC is the slope of the initial condition effect. 
 
 Extra Credit (Part 2):
 ----------------------
 
 Repeat the process of forecasting the last 40 observations (convert to NA), this time using the DLM with temperature as a covariate
 
+
+```{r}
+## grab weather data
+data_40 <- list(y=log(y_40),n=length(y_40),x_ic=log(1000),tau_ic=100,a_obs=1,r_obs=1,a_add=1,r_add=1)
+df <- daymetr::download_daymet(site = "Boston",
+                lat = 42.36,
+                lon = -71.06,
+                start = 2003,
+                end = 2016,
+                internal = TRUE)$data
+
+df[(length(time)-39): length(time),] = NA
+df$date <- as.Date(paste(df$year,df$yday,sep = "-"),"%Y-%j")
+data_40$Tmin = df$tmin..deg.c.[match(time_40,df$date)]
+## fit the model
+ef.out_40 <- ecoforecastR::fit_dlm(model=list(obs="y",fixed="~ Tmin"),data_40)
+```
+
+```{r}
+params_40 <- window(ef.out_40$params,start=1000) ## remove burn-in
+plot(params_40)
+```
+
 * Generate a time-series plot for the CI that includes the observations and both the random walk and DLM models (Hint, think about the order you plot in so you can see both models, also consider including transpancy [alpha] in the CI color)
 
+```{r}
+gflu = read.csv("http://www.google.org/flutrends/about/data/flu/us/data.txt",skip=11)
+time = as.Date(gflu$Date)
+y = gflu$Massachusetts
+time_40 = time
+y_40 = y
+time_40[(length(time)-39): length(time)] = NA
+y_40[(length(time)-39): length(time)] = NA
 
+out_40 <- as.matrix(jags.out_40)
+tau_add = out_40[,1]
+tau_obs = out_40[,2]
+
+for(t in (length(time)-39-1):length(time)){
+   y_40[t] <- rnorm(1, y_40[t-1], tau_add)
+}
+
+time.rng_40 = c(length(time)-80,length(time)) ## adjust to zoom in and out
+
+x.cols_40 <- grep("^x",colnames(out_40)) ## grab all columns that start with the letter x
+ci_40 <- apply(exp(out_40[,x.cols_40]),2,quantile,c(0.025,0.5,0.975)) ## model was fit on log scale
+
+plot(time,ci_40[2,],type='n',ylim=range(y_40,na.rm=TRUE),ylab="Flu Index",log='y',xlim=time[time.rng_40])
+## adjust x-axis label to be monthly if zoomed
+
+if(diff(time.rng_40) < 100){
+  axis.Date(1, at=seq(time[time.rng_40[1]],time[time.rng_40[2]],by='month'), format = "%Y-%m")
+}
+ecoforecastR::ciEnvelope(time,ci_40[1,],ci_40[3,],col=ecoforecastR::col.alpha("lightBlue",0.75))
+points(time,y_40,pch="+",cex=0.5)
+points(time[(length(time)-39): length(time)],y[(length(time)-39): length(time)],pch="+",cex=0.5, col=2)
+
+out_lm40 <- as.matrix(ef.out_40$predict)
+ci_lm40 <- apply(exp(out_lm40),2,quantile,c(0.025,0.5,0.975))
+#plot(time,ci[2,],type='n',ylim=range(y,na.rm=TRUE),ylab="Flu Index",log='y',xlim=time[time.rng])
+## adjust x-axis label to be monthly if zoomed
+if(diff(time.rng_40) < 100){ 
+  axis.Date(1, at=seq(time[time.rng_40[1]],time[time.rng_40[2]],by='month'), format = "%Y-%m")
+}
+ecoforecastR::ciEnvelope(time,ci_lm40[1,],ci_lm40[3,],col=ecoforecastR::col.alpha("red",0.75))
+points(time,y,pch="+",cex=0.5)
+
+```
 * Comment on how well the DLM model performed (both accuracy and precision) relative to the random walk and the true observations. How could the model be further improved?
+
+The DLM model performed well in terms of precision, but not well in terms of accuracy. The DLM model have better precision than the random walk model. The model can be improved with more data and more variables.
