@@ -527,7 +527,25 @@ for(i in 1:ni){
   
 ```
 
+What is the relative partitioning of uncertainties in the different versions of the model among observation error, process error, and the different random effects? What does the size of these effects suggest about the drivers of uncertainty in tree growth?
 
+```{r}
+var.out1 = as.matrix(jags.out)
+var_mu1 = mean(1/var.out1[1,])
+var_add1 = mean(1/var.out1[2,])
+var_dbh1 = mean(1/var.out1[3,])
+var_inc1 = mean(1/var.out1[4,])
+total1 = var_mu1 + var_add1 + var_dbh1 + var_inc1
+total1
+var.out2 = as.matrix(jags.out2)
+var_mu2 = mean(1/var.out2[1,])
+var_add2 = mean(1/var.out2[2,])
+var_dbh2 = mean(1/var.out2[3,])
+var_inc2 = mean(1/var.out2[4,])
+var_ind2 = mean(1/var.out2[5,])
+var_yr2 = mean(1/var.out2[6,])
+
+```
 
 3. Based on the diagnostics, propose an additional effect (fixed or random) to add to the model. Such an effect should plausibly chip away at a sizable fraction of the unexplained variability -- you wouldn't want to propose an effect that isn't associated with systematic variability. 
 
