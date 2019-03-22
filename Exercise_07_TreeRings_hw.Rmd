@@ -519,13 +519,15 @@ for(i in 1:ni){
   jags.out2   <- coda.samples (model = j.model,
                               variable.names = c("tau_add","tau_dbh","tau_inc","mu","tau_ind","tau_yr"),
                               n.iter = 50000)
-  GBR <- gelman.plot(jags.out)
-  burnin = 40000 # determine the burn in as 30000 steps.
+  GBR <- gelman.plot(jags.out2)
+  burnin = 40000 # determine the burn in as 40000 steps.
   jags.burn2 <- window(jags.out2,start=burnin) # remove burnin
   gelman.diag(jags.burn2)
   plot(jags.burn2)
   
 ```
+
+
 
 3. Based on the diagnostics, propose an additional effect (fixed or random) to add to the model. Such an effect should plausibly chip away at a sizable fraction of the unexplained variability -- you wouldn't want to propose an effect that isn't associated with systematic variability. 
 
