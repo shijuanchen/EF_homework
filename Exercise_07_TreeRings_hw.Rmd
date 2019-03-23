@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 Fusing Times-Series Data: Tree Rings and Forest Inventory
 ========================================================
 
@@ -531,26 +536,83 @@ What is the relative partitioning of uncertainties in the different versions of 
 
 ```{r}
 var.out1 = as.matrix(jags.out)
-var_mu1 = mean(1/var.out1[1,])
-var_add1 = mean(1/var.out1[2,])
+var.out1
+var_add1 = mean(1/var.out1[2,])   
 var_dbh1 = mean(1/var.out1[3,])
 var_inc1 = mean(1/var.out1[4,])
-total1 = var_mu1 + var_add1 + var_dbh1 + var_inc1
-total1
+total1 = var_add1 + var_dbh1 + var_inc1
+per_add1 = (var_add1 / total1) * 100  # process error of growth
+per_dbh1 = (var_dbh1 / total1) * 100  # observation error of DBH
+per_inc1 = (var_inc1 / total1) * 100  # observation error of tree rings
+per_mu1
+per_add1 
+per_dbh1
+per_inc1
 var.out2 = as.matrix(jags.out2)
-var_mu2 = mean(1/var.out2[1,])
 var_add2 = mean(1/var.out2[2,])
 var_dbh2 = mean(1/var.out2[3,])
 var_inc2 = mean(1/var.out2[4,])
 var_ind2 = mean(1/var.out2[5,])
 var_yr2 = mean(1/var.out2[6,])
-
+total2 = var_add2 + var_dbh2 + var_inc2 + var_ind2 + var_yr2
+per_add2 = (var_add2 / total2) * 100  # process error of growth
+per_dbh2 = (var_dbh2 / total2) * 100  # observation error of DBH
+per_inc2 = (var_inc2 / total2) * 100  # observation error of tree rings
+per_ind2 = (var_ind2 / total2) * 100  # random effects of individuals
+per_yr2 = (var_yr2 / total2) * 100    # random effect of year
 ```
+
+For the first version of the model (without random effects), the variance of the process error of growth, the observation error of DBH, and the observation error of tree rings is `r var_add1`, `r var_dbh1`,and `r var_inc1`, respectively. In the first model, the percentage of variance of the process error of growth, the observation error of DBH, and the observation error of tree rings is `r per_add1`, `r per_dbh1`,and `r per_inc1`, respectively. 
+
+For the second version of the model (with random effects), the variance of the process error of growth, the observation error of DBH, the observation error of tree rings, the random effects of individuals, and random effect of year is `r var_add2`, `r var_dbh2`, `r var_inc2`, `r var_ind2`, and `r var_yr2`, respectively. In the second model, the percentage of variance of the process error of growth, the observation error of DBH, the observation error of tree rings, the random effects of individuals, and random effect of year  is `r per_add2`, `r per_dbh2`, `r per_inc2`, `r var_ind2`, and `r var_yr2`, respectively. 
 
 3. Based on the diagnostics, propose an additional effect (fixed or random) to add to the model. Such an effect should plausibly chip away at a sizable fraction of the unexplained variability -- you wouldn't want to propose an effect that isn't associated with systematic variability. 
 
+I propose to add annual temperature as a fixed effect to the model. The assumption is that annual temperature is positively correlated with tree ring width. 
+
 4. Explain any additional exploratory analyses you would perform (e.g. plotting your proposed covariate against one of the random effects). 
+
+I will make the time series plot of the annual temperature versus the year, and also the time series plot of the tree ring data. I will also calculate the correlation to see if there is any relationship between the two. 
 
 5. Write the JAGS code that would fit the proposed model (note: you don't have to run this model, just propose the code)
 
+Suppose to add "temp"" as annual temperature variable. The priors of temperature can be read from the external data sources.
+
+The jags model would be like this:
+
+```
+model{
+
+### Loop over all individuals
+for(i in 1:ni){
+  
+  #### Data Model: DBH
+  for(t in 1:nt){
+  z[i,t] ~ dnorm(x[i,t],tau_dbh)
+  }
+  
+  #### Data Model: growth
+  for(t in 2:nt){
+  inc[i,t] <- x[i,t]-x[i,t-1]
+  y[i,t] ~ dnorm(inc[i,t],tau_inc)
+  }
+  
+  #### Process Model
+  for(t in 2:nt){
+  Dnew[i,t] <- x[i,t-1] + mu + temp
+  x[i,t]~dnorm(Dnew[i,t],tau_add)
+  }
+  
+  x[i,1] ~ dnorm(x_ic,tau_ic)
+
+}  ## end loop over individuals
+  
+  #### Priors
+  tau_dbh ~ dgamma(a_dbh,r_dbh)
+  tau_inc ~ dgamma(a_inc,r_inc)
+  tau_add ~ dgamma(a_add,r_add)
+  mu ~ dnorm(0.5,0.5)
+  temp ~ dgamma(a_temp, r_temp)
+}"
+```
 ** BECAUSE THE PRODUCTION VERSION OF THIS CODE TAKES A LONG TIME TO RUN, PLEASE SUBMIT THE KNIT HTML NOT THE Rmd **
