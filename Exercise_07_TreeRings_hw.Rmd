@@ -1,7 +1,7 @@
 ---
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 Fusing Times-Series Data: Tree Rings and Forest Inventory
 ========================================================
@@ -379,7 +379,7 @@ By default this code is set to run with a small number of years (15), and a much
 Assignment:
 
 1. Run the model initially with random effects off
-Run the model with random effects off; increase the number of years to 30 and MCMC to 20000
+Run the model with random effects off; increase the number of years to 30 and MCMC to 50000
 
 ```{r, fig.asp=0.8}
 
@@ -422,6 +422,7 @@ for(i in 1:ni){
   ## state variable initial condition (subtract observed diameter increments off from the observed diameter)
   z0 = t(apply(data$y,1,function(y){-rev(cumsum(rev(y)))})) + data$z[,ncol(data$z)] 
   
+  n.iter = 40000
   ## JAGS initial conditions
   nchain = 3
   init <- list()
@@ -440,17 +441,17 @@ for(i in 1:ni){
   ## burn-in
   jags.out   <- coda.samples (model = j.model,
                               variable.names = c("tau_add","tau_dbh","tau_inc","mu"),
-                              n.iter = 50000)
+                              n.iter = n.iter)
 
   GBR <- gelman.plot(jags.out)
-  burnin = 40000 
+  burnin = 30000
   jags.burn <- window(jags.out,start=burnin) # remove burnin
   gelman.diag(jags.burn)
   plot(jags.burn)
   ## run MCMC
   jags.out.x   <- coda.samples (model = j.model,
                               variable.names = c("x","tau_add","tau_dbh","tau_inc","mu"),
-                              n.iter = 50000)
+                              n.iter = n.iter)
 ```
 
 2. Rerun the model with random effects on. Compare this to the previous run. What is the relative partitioning of uncertainties in the different versions of the model among observation error, process error, and the different random effects? What does the size of these effects suggest about the drivers of uncertainty in tree growth?
@@ -507,6 +508,8 @@ for(i in 1:ni){
 ## state variable initial condition (subtract observed diameter increments off from the observed diameter)
   z0 = t(apply(data$y,1,function(y){-rev(cumsum(rev(y)))})) + data$z[,ncol(data$z)] 
   
+  n.iter = 40000
+  
   ## JAGS initial conditions
   nchain = 3
   init <- list()
@@ -523,9 +526,9 @@ for(i in 1:ni){
                            n.chains = 3)
   jags.out2   <- coda.samples (model = j.model,
                               variable.names = c("tau_add","tau_dbh","tau_inc","mu","tau_ind","tau_yr"),
-                              n.iter = 50000)
+                              n.iter = n.iter)
   GBR <- gelman.plot(jags.out2)
-  burnin = 40000 # determine the burn in as 40000 steps.
+  burnin = 30000
   jags.burn2 <- window(jags.out2,start=burnin) # remove burnin
   gelman.diag(jags.burn2)
   plot(jags.burn2)
@@ -536,7 +539,6 @@ What is the relative partitioning of uncertainties in the different versions of 
 
 ```{r}
 var.out1 = as.matrix(jags.out)
-var.out1
 var_add1 = mean(1/var.out1[2,])   
 var_dbh1 = mean(1/var.out1[3,])
 var_inc1 = mean(1/var.out1[4,])
@@ -544,10 +546,6 @@ total1 = var_add1 + var_dbh1 + var_inc1
 per_add1 = (var_add1 / total1) * 100  # process error of growth
 per_dbh1 = (var_dbh1 / total1) * 100  # observation error of DBH
 per_inc1 = (var_inc1 / total1) * 100  # observation error of tree rings
-per_mu1
-per_add1 
-per_dbh1
-per_inc1
 var.out2 = as.matrix(jags.out2)
 var_add2 = mean(1/var.out2[2,])
 var_dbh2 = mean(1/var.out2[3,])
@@ -562,9 +560,11 @@ per_ind2 = (var_ind2 / total2) * 100  # random effects of individuals
 per_yr2 = (var_yr2 / total2) * 100    # random effect of year
 ```
 
-For the first version of the model (without random effects), the variance of the process error of growth, the observation error of DBH, and the observation error of tree rings is `r var_add1`, `r var_dbh1`,and `r var_inc1`, respectively. In the first model, the percentage of variance of the process error of growth, the observation error of DBH, and the observation error of tree rings is `r per_add1`, `r per_dbh1`,and `r per_inc1`, respectively. 
+For the first version of the model (without random effects), the variance of the process error of growth, the observation error of DBH, and the observation error of tree rings is `r var_add1`, `r var_dbh1`,and `r var_inc1`, respectively. In the first model, the percentage of variance of the process error of growth, the observation error of DBH, and the observation error of tree rings is `r per_add1`%, `r per_dbh1`%,and `r per_inc1`%, respectively. 
 
-For the second version of the model (with random effects), the variance of the process error of growth, the observation error of DBH, the observation error of tree rings, the random effects of individuals, and random effect of year is `r var_add2`, `r var_dbh2`, `r var_inc2`, `r var_ind2`, and `r var_yr2`, respectively. In the second model, the percentage of variance of the process error of growth, the observation error of DBH, the observation error of tree rings, the random effects of individuals, and random effect of year  is `r per_add2`, `r per_dbh2`, `r per_inc2`, `r var_ind2`, and `r var_yr2`, respectively. 
+For the second version of the model (with random effects), the variance of the process error of growth, the observation error of DBH, the observation error of tree rings, the random effects of individuals, and random effect of year is `r var_add2`, `r var_dbh2`, `r var_inc2`, `r var_ind2`, and `r var_yr2`, respectively. In the second model, the percentage of variance of the process error of growth, the observation error of DBH, the observation error of tree rings, the random effects of individuals, and random effect of year  is `r per_add2`%, `r per_dbh2`%, `r per_inc2`%, `r var_ind2`%, and `r var_yr2`%, respectively. 
+
+In the two version of the model, the process error uncertainty is the largest. In the second model, the random effects error uncertainty is very small.
 
 3. Based on the diagnostics, propose an additional effect (fixed or random) to add to the model. Such an effect should plausibly chip away at a sizable fraction of the unexplained variability -- you wouldn't want to propose an effect that isn't associated with systematic variability. 
 
