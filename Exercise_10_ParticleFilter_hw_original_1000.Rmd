@@ -85,8 +85,7 @@ Having defined our model, the next step is to define the ensemble size and gener
 
 ```{r}
 #### SET THE ENSEMBLE SIZE
-#ne = 10 ## production run should be 200 - 5000, depending on what your computer can handle
-ne = 200
+ne = 1000 ## production run should be 200 - 5000, depending on what your computer can handle
 
 ### Initial State (Mg/ha)
 Bwood = (c(11983,12097)+c(3668,3799)+c(161,192))*1e-6*10000 ## stem+coarse root + fine root, g/m2->Mg/ha
@@ -187,7 +186,8 @@ Now we're ready to produce our initial ensemble forecast for the system. To do t
 
 ```{r}
 X = X.orig
-nt = nrow(inputs)                              ## production run should be nrow(inputs)   ***********************
+#nt = 17*48                              ## production run should be nrow(inputs)   ***********************
+nt = nrow(inputs)
 output = array(0.0,c(nt,ne,12))         ## output storage 
 
 ## foreward ensemble simulation
@@ -368,7 +368,7 @@ for(t in 1:nt){
 }
 
 ## save all the output
-save(output,output.ensemble,LAIlike,hist.params,inputs,file="Ex10.output.RData") 
+save(output,output.ensemble,LAIlike,hist.params,inputs,file="Ex10.output_hw.RData") 
 ```
 
 Next, let's compare the resampling particle filter to the ensemble and the non-resampling PF.
